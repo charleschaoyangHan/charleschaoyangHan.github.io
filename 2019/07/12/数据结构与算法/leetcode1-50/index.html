@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 3.9.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>leetcode 1-50 - charles&#39;s blog</title>
+
+
+    <meta name="description" content="1. 两数之和Given an array of integers, return indices of the two numbers such that they add up to a specific target. You may assume that each input would have exactly one solution, and you may not use the">
+<meta name="keywords" content="leetcode,数据结构与算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="leetcode 1-50">
+<meta property="og:url" content="https://github.com/charleschaoyangHan/2019/07/12/数据结构与算法/leetcode1-50/index.html">
+<meta property="og:site_name" content="charles&#39;s blog">
+<meta property="og:description" content="1. 两数之和Given an array of integers, return indices of the two numbers such that they add up to a specific target. You may assume that each input would have exactly one solution, and you may not use the">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/images/og_image.png">
+<meta property="og:updated_time" content="2021-03-05T02:42:27.338Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="leetcode 1-50">
+<meta name="twitter:description" content="1. 两数之和Given an array of integers, return indices of the two numbers such that they add up to a specific target. You may assume that each input would have exactly one solution, and you may not use the">
+<meta name="twitter:image" content="https://github.com/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-2-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="leetcode 1-50" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/categories">Categories</a>
+                
+                <a class="navbar-item"
+                href="/tags">Tags</a>
+                
+                <a class="navbar-item"
+                href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-8-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <!-- <time class="level-item has-text-grey" datetime="2019-07-12T01:59:21.000Z">2019-07-12</time> -->
+                <time class="level-item has-text-grey">写于2019-07-12</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/leetcode/">leetcode</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    10 分钟 读完 (大约 1459 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                leetcode 1-50
+            
+        </h1>
+        <div class="content">
+            <h3 id="1-两数之和"><a href="#1-两数之和" class="headerlink" title="1. 两数之和"></a>1. 两数之和</h3><p>Given an array of integers, return indices of the two numbers such that they add up to a specific target.</p>
+<p>You may assume that each input would have exactly one solution, and you may not use the same element twice.</p>
+<p>Example:</p>
+<a id="more"></a>
+<blockquote>
+<p>Given nums = [2, 7, 11, 15], target = 9,</p>
+<p>Because nums[0] + nums[1] = 2 + 7 = 9,<br>return [0, 1].</p>
+<p>这个是没有用到字典的代码，虽然实现了上述功能但是，时间花费很多。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">&gt;<span class="function"><span class="keyword">def</span> <span class="title">twoSum</span><span class="params">(self, nums,target)</span>:</span></span><br><span class="line">&gt;<span class="keyword">for</span> i <span class="keyword">in</span> nums:</span><br><span class="line">&gt;  j=target-i</span><br><span class="line">&gt;  start_index = nums.index(i)</span><br><span class="line">&gt;  next_index = start_index+<span class="number">1</span></span><br><span class="line">&gt;  temp_nums = nums[next_index:] //将从next_index到最后最后这些元素新建一个Array</span><br><span class="line">&gt;  <span class="keyword">if</span> j <span class="keyword">in</span> temp_nums:    //判断一下j是否在temp_nums这个数组中</span><br><span class="line">&gt;      <span class="keyword">return</span>(nums.index(i),next_index+temp_nums.index(j))</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] twoSum(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target) &#123;</span><br><span class="line">        <span class="keyword">if</span> (nums == <span class="keyword">null</span> || nums.length&lt;<span class="number">2</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;-<span class="number">1</span>,-<span class="number">1</span>&#125;;</span><br><span class="line">        &#125;</span><br><span class="line">       <span class="keyword">int</span>[] res=<span class="keyword">new</span> <span class="keyword">int</span> []&#123;-<span class="number">1</span>,-<span class="number">1</span>&#125;; <span class="comment">//为了存最后的访问结果 </span></span><br><span class="line">        HashMap&lt;Integer,Integer &gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();<span class="comment">//定义一个HashMap</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">0</span>;i&lt;nums.length;i++)&#123;              <span class="comment">//遍历这个数组</span></span><br><span class="line">             <span class="keyword">if</span> (map.containsKey(target-nums[i]))&#123;</span><br><span class="line">                 res[<span class="number">0</span>]= map.get(target-nums[i]);</span><br><span class="line">                 res[<span class="number">1</span>]=i;</span><br><span class="line">                 <span class="keyword">break</span>;</span><br><span class="line">             &#125; </span><br><span class="line">             map.put(nums[i],i);            <span class="comment">//HashMap存对应的每个值，和index</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        </span><br><span class="line">        &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这段代码主要用到了hashmap的算法，大大提高了效率，但是暂时还不会</p>
+<h3 id="9-回文数"><a href="#9-回文数" class="headerlink" title="9. 回文数"></a>9. 回文数</h3><h4 id="题目摘要"><a href="#题目摘要" class="headerlink" title="题目摘要"></a>题目摘要</h4><p>判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。</p>
+<h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p>一些一定不为回文数的数：<br>1.负数<br>2.大于0，但末位为0的数（x&gt; 0 &amp;&amp; x % 10 == 0）<br>如果是上面这些情况则直接返回false。</p>
+<p>将整数的每一位存入数组中，arr[i]代表整数的倒数i+1位。</p>
+<p>然后判断arr[i]是否和arr[num -1 -i]位是否相等，如果相等则判断下一位；否则返回false<br>当i&gt; num-i-1时如果还没返回则代表所有字符的是相对称的，也就是回文数，返回true</p>
+<h4 id="下面是python的代码："><a href="#下面是python的代码：" class="headerlink" title="下面是python的代码："></a>下面是python的代码：</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isPalindrome</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type x: int</span></span><br><span class="line"><span class="string">        :rtype: bool</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        a=abs(x)</span><br><span class="line">        sum=<span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span>(a!=<span class="number">0</span>):</span><br><span class="line">            p=x%<span class="number">10</span></span><br><span class="line">            sum=sum*<span class="number">10</span>+p</span><br><span class="line">            a=a//<span class="number">10</span></span><br><span class="line">        <span class="keyword">if</span> x&gt;=<span class="number">0</span> <span class="keyword">and</span> x==sum:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+<h4 id="下面是高级版python代码：希望以后再回来看将它弄懂"><a href="#下面是高级版python代码：希望以后再回来看将它弄懂" class="headerlink" title="下面是高级版python代码：希望以后再回来看将它弄懂"></a>下面是高级版python代码：希望以后再回来看将它弄懂</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isPalindrome</span><span class="params">(self, x: int)</span> -&gt; bool:</span></span><br><span class="line">        r = list(map(<span class="keyword">lambda</span> i: int(<span class="number">10</span>**-i * x % <span class="number">10</span>), range(int(math.log10(x)), <span class="number">-1</span>, <span class="number">-1</span>))) <span class="keyword">if</span> x &gt; <span class="number">0</span> <span class="keyword">else</span> [<span class="number">0</span>, x]</span><br><span class="line">        <span class="keyword">return</span> r == r[::<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
+<h4 id="下面是java的代码："><a href="#下面是java的代码：" class="headerlink" title="下面是java的代码："></a>下面是java的代码：</h4><p>简单暴力型的主要是用到java自带的函数：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">///简单粗暴，看看就行</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isPalindrome</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        String reversedStr = (<span class="keyword">new</span> StringBuilder(x + <span class="string">""</span>)).reverse().toString();</span><br><span class="line">        <span class="keyword">return</span> (x + <span class="string">""</span>).equals(reversedStr);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="解法二："><a href="#解法二：" class="headerlink" title="解法二："></a>解法二：</h4><p>进阶解法—数学解法<br>通过取整和取余操作获取整数中对应的数字进行比较。</p>
+<p>举个例子：1221 这个数字。具体做法如下：</p>
+<ul>
+<li>通过计算 1221 / 1000， 得首位1</li>
+<li>通过计算 1221 % 10， 可得末位 1</li>
+<li>进行比较</li>
+<li>再将 22 取出来继续比较</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isPalindrome</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;  <span class="comment">//定义一个布尔类型的方法</span></span><br><span class="line">        <span class="comment">//边界判断</span></span><br><span class="line">        <span class="keyword">if</span> (x &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">int</span> div = <span class="number">1</span>;</span><br><span class="line">        <span class="comment">//</span></span><br><span class="line">        <span class="keyword">while</span> (x / div &gt;= <span class="number">10</span>) div *= <span class="number">10</span>;</span><br><span class="line">        <span class="keyword">while</span> (x &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> left = x / div;</span><br><span class="line">            <span class="keyword">int</span> right = x % <span class="number">10</span>;</span><br><span class="line">            <span class="keyword">if</span> (left != right) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            x = (x % div) / <span class="number">10</span>;</span><br><span class="line">            div /= <span class="number">100</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="解法三："><a href="#解法三：" class="headerlink" title="解法三："></a>解法三：</h4><p>进阶解法—巧妙解法<br>直观上来看待回文数的话，就感觉像是将数字进行对折后看能否一一对应。</p>
+<p>所以这个解法的操作就是 取出后半段数字进行翻转。</p>
+<p>这里需要注意的一个点就是由于回文数的位数可奇可偶，所以当它的长度是偶数时，它对折过来应该是相等的；当它的长度是奇数时，那么它对折过来后，有一个的长度需要去掉一位数（除以 10 并取整）。</p>
+<p>具体做法如下：</p>
+<ul>
+<li>每次进行取余操作 （ %10），取出最低的数字：<code>y = x % 10</code></li>
+<li>将最低的数字加到取出数的末尾：<code>revertNum = revertNum * 10 + y</code></li>
+<li>每取一个最低位数字，x 都要自除以 10</li>
+<li>判断 x 是不是小于<code>revertNum</code> ，当它小于的时候，说明数字已经对半或者过半了</li>
+<li>最后，判断奇偶数情况：如果是偶数的话，revertNum 和 x 相等；如果是奇数的话，最中间的数      字就在revertNum 的最低位上，将它除以 10 以后应该和 x 相等。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isPalindrome</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//思考：这里大家可以思考一下，为什么末尾为 0 就可以直接返回 false</span></span><br><span class="line">        <span class="keyword">if</span> (x &lt; <span class="number">0</span> || (x % <span class="number">10</span> == <span class="number">0</span> &amp;&amp; x != <span class="number">0</span>)) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">int</span> revertedNumber = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (x &gt; revertedNumber) &#123;</span><br><span class="line">            revertedNumber = revertedNumber * <span class="number">10</span> + x % <span class="number">10</span>;</span><br><span class="line">            x /= <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> x == revertedNumber || x == revertedNumber / <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="14-最长公共前缀"><a href="#14-最长公共前缀" class="headerlink" title="14. 最长公共前缀"></a>14. 最长公共前缀</h3><p>难度 easy 题目名称 </p>
+<!-- more -->
+<h4 id="题目摘要-1"><a href="#题目摘要-1" class="headerlink" title="题目摘要"></a>题目摘要</h4><p>编写一个函数来查找字符串数组中的最长公共前缀。</p>
+<p>如果不存在公共前缀，返回空字符串 “”。</p>
+<p>示例 1:</p>
+<blockquote>
+<p>输入: [“flower”,”flow”,”flight”]<br>输出: “fl”<br>示例 2:</p>
+</blockquote>
+<blockquote>
+<p>输入: [“dog”,”racecar”,”car”]<br>输出:<code>&quot;&quot;</code><br>解释: 输入不存在公共前缀。</p>
+</blockquote>
+<h4 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h4><p>首先判断字符串是否为空，如果是直接输出<code>&quot;&quot;</code>之后建立两个for循环，第一层循环是遍历第一个字符串，第二个循环是从第二个字符串开始和第一个字符串进行比较，这里有一些反常，就是不满足条件就退出。这个条件是i大于字符串的长度，或者就是遇到不相等的了，返回这个前缀，当然如果是一个空字符串，就返回<code>&quot;&quot;</code><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">longestCommonPrefix</span><span class="params">(self, strs: List[str])</span> -&gt; str:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> strs:</span><br><span class="line">            <span class="keyword">return</span><span class="string">""</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(strs[<span class="number">0</span>])):</span><br><span class="line">            <span class="keyword">for</span> string <span class="keyword">in</span> strs[<span class="number">1</span>:]:  <span class="comment">#从列表中第一个位置与第0的位置比较</span></span><br><span class="line">                <span class="keyword">if</span>  i&gt;=len(string) <span class="keyword">or</span> string[i] != strs[<span class="number">0</span>][i] :  <span class="comment">#就是遍历的i大于单词的长度</span></span><br><span class="line">                    <span class="keyword">return</span> strs[<span class="number">0</span>][:i]</span><br><span class="line">        <span class="keyword">return</span> strs[<span class="number">0</span>]             <span class="comment">#如果是一个[""],这种情况下返回第一个字符</span></span><br></pre></td></tr></table></figure></p>
+<p>下面是高级一些的python代码：</p>
+<h4 id="思路2"><a href="#思路2" class="headerlink" title="思路2"></a>思路2</h4><p>我先设置一个空的字符串，<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">longestCommonPrefix</span><span class="params">(self, strs: List[str])</span> -&gt; str:</span></span><br><span class="line">        result =<span class="string">""</span></span><br><span class="line">        i=<span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                sets=set(string[i]<span class="keyword">for</span> string <span class="keyword">in</span> strs)</span><br><span class="line"><span class="comment">#因为set是集合的概念，遍历这个列表的每一个字符串的第i位，输出的都是不同的值，如果相同就输出一个，</span></span><br><span class="line">                <span class="keyword">if</span> len(sets)==<span class="number">1</span>:    <span class="comment">#如果对应位置不是同一个字符，那么就不会是1</span></span><br><span class="line">                    result+=sets.pop()</span><br><span class="line"><span class="comment"># pop是出栈的意思，后进后出（当然也只有一个元素）弹出加在result后面</span></span><br><span class="line">                    i+=<span class="number">1</span></span><br><span class="line"><span class="comment">#在去检查下一个字符</span></span><br><span class="line">                <span class="keyword">else</span>: <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">except</span> Exception <span class="keyword">as</span> e:  <span class="comment">#</span></span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure></p>
+<p>$$ —- \mathcal{End} —- $$</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/leetcode/">leetcode</a>, <a class="has-link-grey -link" href="/tags/数据结构与算法/">数据结构与算法</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/公众号.bmp" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/wechat.jpg" alt="微信"></div>
+</a>
+
+                
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<a class="button is-warning donate" onclick="document.getElementById(&#39;paypal-donate-form&#39;).submit()">
+    <span class="icon is-small">
+        <i class="fab fa-paypal"></i>
+    </span>
+    <span>Paypal</span>
+</a>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" rel="noopener" id="paypal-donate-form">
+    <input type="hidden" name="cmd" value="_donations" />
+    <input type="hidden" name="business" value="1844988765@qq.com" />
+    <input type="hidden" name="currency_code" value="USD" />
+</form>
+
+                
+                
+<a class="button is-danger donate" href="https://github.com/charleschaoyangHan" target="_blank" rel="noopener">
+    <span class="icon is-small">
+        <i class="fab fa-patreon"></i>
+    </span>
+    <span>Patreon</span>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/07/12/leetcode1-50/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">leetcode 1-50</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/05/14/命令行与配置/Markdown笔记/">
+                <span class="level-item">Markdown基础</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-4-widescreen  has-order-3 column-right ">
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            阅读推荐
+        </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-12T01:59:21.000Z">2019-07-12</time></div>
+                    <a href="/2019/07/12/leetcode1-50/" class="title has-link-black-ter is-size-6 has-text-weight-normal">leetcode 1-50</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/leetcode/">leetcode</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-05T16:00:00.000Z">2020-06-06</time></div>
+                    <a href="/2020/06/06/数据库/1.数据库基础-DQL/" class="title has-link-black-ter is-size-6 has-text-weight-normal">1.数据库基础—DQL</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/数据库/">数据库</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-08T16:00:00.000Z">2020-06-09</time></div>
+                    <a href="/2020/06/09/数据库/3.数据库的设计/" class="title has-link-black-ter is-size-6 has-text-weight-normal">3.数据库的设计</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/数据库/">数据库</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-07T16:00:00.000Z">2020-06-08</time></div>
+                    <a href="/2020/06/08/数据库/2.数据库基础-DML&DDL /" class="title has-link-black-ter is-size-6 has-text-weight-normal">2.数据库基础-DML&amp;DDL</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/数据库/">数据库</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-05T16:00:00.000Z">2020-06-06</time></div>
+                    <a href="/2020/06/06/数据库/5.常见约束&TCL事务控制语言/" class="title has-link-black-ter is-size-6 has-text-weight-normal">5.常见约束&amp;TCL事务控制语言</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/数据库/">数据库</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+        
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#1-两数之和">
+        <!-- <span class="has-mr-6">1</span> -->
+        <span>1. 两数之和</span>
+        </a></li><li>
+        <a class="is-flex" href="#9-回文数">
+        <!-- <span class="has-mr-6">2</span> -->
+        <span>9. 回文数</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#题目摘要">
+        <!-- <span class="has-mr-6">2.1</span> -->
+        <span>题目摘要</span>
+        </a></li><li>
+        <a class="is-flex" href="#思路">
+        <!-- <span class="has-mr-6">2.2</span> -->
+        <span>思路</span>
+        </a></li><li>
+        <a class="is-flex" href="#下面是python的代码：">
+        <!-- <span class="has-mr-6">2.3</span> -->
+        <span>下面是python的代码：</span>
+        </a></li><li>
+        <a class="is-flex" href="#下面是高级版python代码：希望以后再回来看将它弄懂">
+        <!-- <span class="has-mr-6">2.4</span> -->
+        <span>下面是高级版python代码：希望以后再回来看将它弄懂</span>
+        </a></li><li>
+        <a class="is-flex" href="#下面是java的代码：">
+        <!-- <span class="has-mr-6">2.5</span> -->
+        <span>下面是java的代码：</span>
+        </a></li><li>
+        <a class="is-flex" href="#解法二：">
+        <!-- <span class="has-mr-6">2.6</span> -->
+        <span>解法二：</span>
+        </a></li><li>
+        <a class="is-flex" href="#解法三：">
+        <!-- <span class="has-mr-6">2.7</span> -->
+        <span>解法三：</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#14-最长公共前缀">
+        <!-- <span class="has-mr-6">3</span> -->
+        <span>14. 最长公共前缀</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#题目摘要-1">
+        <!-- <span class="has-mr-6">3.1</span> -->
+        <span>题目摘要</span>
+        </a></li><li>
+        <a class="is-flex" href="#思路-1">
+        <!-- <span class="has-mr-6">3.2</span> -->
+        <span>思路</span>
+        </a></li><li>
+        <a class="is-flex" href="#思路2">
+        <!-- <span class="has-mr-6">3.3</span> -->
+        <span>思路2</span>
+        </a></li></ul></li></ul>
+            </div>
+        </div>
+    </div>
+
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="leetcode 1-50" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2021 charles&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'https://github.com/charleschaoyangHan',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

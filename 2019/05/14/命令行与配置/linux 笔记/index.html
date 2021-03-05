@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 3.9.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>linux基础篇 - charles&#39;s blog</title>
+
+
+    <meta name="description" content="第一章 实操类 实用指令1.1文件目录类pwd：查看当前所在文件ls：查看当前所在文件夹下内容 ls -a：显示指定目录下所有子目录与文件，包含隐藏文件。 ls -l：以列表方式显示文件的详细信息。">
+<meta name="keywords" content="linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux基础篇">
+<meta property="og:url" content="https://github.com/charleschaoyangHan/2019/05/14/命令行与配置/linux 笔记/index.html">
+<meta property="og:site_name" content="charles&#39;s blog">
+<meta property="og:description" content="第一章 实操类 实用指令1.1文件目录类pwd：查看当前所在文件ls：查看当前所在文件夹下内容 ls -a：显示指定目录下所有子目录与文件，包含隐藏文件。 ls -l：以列表方式显示文件的详细信息。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/images/og_image.png">
+<meta property="og:updated_time" content="2021-03-05T02:26:09.972Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux基础篇">
+<meta name="twitter:description" content="第一章 实操类 实用指令1.1文件目录类pwd：查看当前所在文件ls：查看当前所在文件夹下内容 ls -a：显示指定目录下所有子目录与文件，包含隐藏文件。 ls -l：以列表方式显示文件的详细信息。">
+<meta name="twitter:image" content="https://github.com/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-2-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="linux基础篇" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/categories">Categories</a>
+                
+                <a class="navbar-item"
+                href="/tags">Tags</a>
+                
+                <a class="navbar-item"
+                href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-8-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <!-- <time class="level-item has-text-grey" datetime="2019-05-14T01:59:21.000Z">2019-05-14</time> -->
+                <time class="level-item has-text-grey">写于2019-05-14</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/命令语法/">命令语法</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    17 分钟 读完 (大约 2611 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                linux基础篇
+            
+        </h1>
+        <div class="content">
+            <h2 id="第一章-实操类-实用指令"><a href="#第一章-实操类-实用指令" class="headerlink" title="第一章 实操类 实用指令"></a>第一章 实操类 实用指令</h2><h3 id="1-1文件目录类"><a href="#1-1文件目录类" class="headerlink" title="1.1文件目录类"></a>1.1文件目录类</h3><h4 id="pwd：查看当前所在文件"><a href="#pwd：查看当前所在文件" class="headerlink" title="pwd：查看当前所在文件"></a><code>pwd</code>：查看当前所在文件</h4><h4 id="ls：查看当前所在文件夹下内容"><a href="#ls：查看当前所在文件夹下内容" class="headerlink" title="ls：查看当前所在文件夹下内容"></a><code>ls</code>：查看当前所在文件夹下内容</h4><p> <code>ls -a</code>：显示指定目录下所有子目录与文件，包含隐藏文件。<br> <code>ls -l</code>：以列表方式显示文件的详细信息。</p>
+<p><img src="https://gitee.com/charles1844988765/cloudimage/raw/master/img/ls-l.png" alt=""></p>
+<a id="more"></a>
+<p> <code>ls -h</code>：配合-l以人性化方式显示文件大小。</p>
+<p><img src="https://gitee.com/charles1844988765/cloudimage/raw/master/img/ls-lh.png" alt=""></p>
+<h4 id="cd-目录名-：切换文件夹"><a href="#cd-目录名-：切换文件夹" class="headerlink" title="cd [目录名]：切换文件夹"></a><code>cd</code> [目录名]：切换文件夹</h4><h4 id="touch-文件名-：如果文件不存在，新建文件"><a href="#touch-文件名-：如果文件不存在，新建文件" class="headerlink" title="touch [文件名]：如果文件不存在，新建文件"></a><code>touch</code> [文件名]：如果文件不存在，新建文件</h4><p><img src="https://img-blog.csdnimg.cn/20200909162010624.png "  /></p>
+<h4 id="mkdir-目录名-：创建目录"><a href="#mkdir-目录名-：创建目录" class="headerlink" title="mkdir [目录名]：创建目录"></a><code>mkdir</code> [目录名]：创建目录</h4><p><img src="https://upload-images.jianshu.io/upload_images/4612913-136c42d0b741c655.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h4 id="rmdir-目录名-：删除空目录"><a href="#rmdir-目录名-：删除空目录" class="headerlink" title="rmdir[目录名]：删除空目录"></a><code>rmdir</code>[目录名]：删除空目录</h4><p><img src="https://upload-images.jianshu.io/upload_images/4612913-5586053fbd910e2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h4 id="rm-文件名-：删除文件名"><a href="#rm-文件名-：删除文件名" class="headerlink" title="rm[文件名]：删除文件名"></a><code>rm</code>[文件名]：删除文件名</h4><blockquote>
+<p>使用rm要小心因为删除后文件不可以恢复</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-f</td>
+<td>强制删除，忽略不存在的文件，无需提示</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>递归的删除目录下的文件的内容，<strong>删除文件夹时候，必须带此参数</strong></td>
+</tr>
+</tbody>
+</table>
+<h4 id="cp-文件名-或-目录名"><a href="#cp-文件名-或-目录名" class="headerlink" title="cp [文件名] 或 [目录名]"></a><code>cp</code> [文件名] 或 [目录名]</h4><ul>
+<li><p>常用选型</p>
+<p>​        <code>-r</code>:递归复制整个文件夹</p>
+</li>
+<li><p>案例1：将/home/aaa.txt 拷贝到 /home/bbb目录下：</p>
+<p><img src="https://img-blog.csdnimg.cn/20200909163348353.png" alt=""></p>
+</li>
+<li><p>案例2：将/home/test 整个目录copy到  /home/zwj/</p>
+</li>
+</ul>
+<div align="center"> <img src="https://img-blog.csdnimg.cn/20200909165816383.png" width = 50%/> </div>
+
+<h4 id="clear-清屏"><a href="#clear-清屏" class="headerlink" title="clear :清屏"></a><code>clear</code> :清屏</h4><h4 id="cat-以只读的格式打开文件"><a href="#cat-以只读的格式打开文件" class="headerlink" title="cat:以只读的格式打开文件"></a><code>cat</code>:以只读的格式打开文件</h4><p><code>more</code>:分屏显示文件内容，每次只显示一页内容</p>
+<p><code>less</code>:和上面类似，但对于大型文件具有较高的效率</p>
+<p><img src="https://img-blog.csdnimg.cn/20200909170955447.png#pic_center" alt=""></p>
+<p><code>head</code>:用于显示文件开头部分内容</p>
+<p><img src="https://img-blog.csdnimg.cn/20200909171323893.png#pic_center" alt=""></p>
+<p><code>tail</code>:用于输出文件尾部的内容</p>
+<p><img src="https://img-blog.csdnimg.cn/20200909171507390.png#pic_center" alt=""></p>
+<p><code>echo</code>:输出内容到控制台</p>
+<p><code>ln</code>:软连接，类似于windows的快捷方式</p>
+<h3 id="1-2搜索查找类"><a href="#1-2搜索查找类" class="headerlink" title="1.2搜索查找类"></a>1.2搜索查找类</h3><h4 id="find："><a href="#find：" class="headerlink" title="find："></a><code>find</code>：</h4><p><strong>从指定的目录下递归的查找各个子目录，将满足条件的文件或者目录显示在终端上</strong></p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-name</td>
+<td>按照指定文件名查找文件</td>
+</tr>
+<tr>
+<td>-user</td>
+<td>查找属于指定用户的所有文件</td>
+</tr>
+<tr>
+<td>-size</td>
+<td>按照指定文件大小查找文件</td>
+</tr>
+</tbody>
+</table>
+<p>案例1：按照文件名，根据名称查找/home目录下的hello.txt</p>
+<p><img src="https://img-blog.csdnimg.cn/2020090921252274.png#pic_center" alt=""></p>
+<p>案例2：按照拥有者，查找/opt目录下的，用户名称为nodody的文件</p>
+<p><img src="https://img-blog.csdnimg.cn/20200909212724794.png#pic_center" alt=""></p>
+<p>案例3：查找Linux系统下大于20M的文件</p>
+<p><img src="https://img-blog.csdnimg.cn/20200909212914870.png#pic_center" alt=""></p>
+<p>案例4：查找 / 目录下所有的.txt的文件</p>
+<p><img src="C:\Users\charl\AppData\Roaming\Typora\typora-user-images\image-20200909213030659.png" alt="image-20200909213030659"></p>
+<h4 id="locate"><a href="#locate" class="headerlink" title="locate:"></a><code>locate</code>:</h4><p><strong>快速定位文件路径</strong></p>
+<p>特别说明：由于locate指令基于数据库进行查询，所以第一次运行前，必须使用updatedb指令创建locate数据库</p>
+<p>案例：定位hello.txt文件的所在目录</p>
+<p><img src="https://img-blog.csdnimg.cn/20200909213836585.png#pic_center" alt="在这里插入图片描述"></p>
+<h4 id="grep：过滤查找"><a href="#grep：过滤查找" class="headerlink" title="grep：过滤查找"></a><code>grep</code>：过滤查找</h4><p>管道符，”|”,表示将前一个命令的处理结果输出传递给后面的命令处理</p>
+<table>
+<thead>
+<tr>
+<th>-n</th>
+<th>显示匹配行和行号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-i</td>
+<td>忽略字母大小写</td>
+</tr>
+</tbody>
+</table>
+<p>案例1：请在hello.txt文件中，查找“yes“所在行，并且显示行号</p>
+<p><img src="https://img-blog.csdnimg.cn/20200909214459982.png#pic_center" alt="在这里插入图片描述"></p>
+<h3 id="1-3压缩和解压类"><a href="#1-3压缩和解压类" class="headerlink" title="1.3压缩和解压类"></a>1.3压缩和解压类</h3><p>以后补上，看尚硅谷老师的课</p>
+<h3 id="1-4-Vim-amp-查看文章"><a href="#1-4-Vim-amp-查看文章" class="headerlink" title="1.4 Vim&amp;查看文章"></a>1.4 Vim&amp;查看文章</h3><ul>
+<li><p><strong>查看</strong>的常用命令<br><code>空格键</code>：显示下一屏<br><code>Enter键</code>：一次滚动一行<br><code>b</code>：回滚一屏<br><code>f</code>：前滚一屏<br><code>q</code>：退出<br><code>Tab</code>:自动补全（若有歧义在按一下,提示可能有的目录）<br><code>ctrl+c</code>:退出选择，重新回到终端</p>
+</li>
+<li><p><strong>通配符</strong>的使用<br><code>*</code>:代表任意一个字符<br><code>?</code>:代表任意一个字符，至少一个<br><code>[]</code>：表示可以匹配字符组的任意一个<br><code>[]</code>：匹配a,b,c中的任意一个<br><code>[a-f]</code>：匹配a到f中的任意一个</p>
+<font color="#0099FF">例子：LS <em>5.txt （也可以不加后缀名）；</font>     <font color="#0099FF">LS \</em>3*</font>
+
+<p><code>ctrl+s</code>：保存文件（文件如多有一个*说明这个文件没有被保存）<br><strong>man</strong>是manual的缩写，是linux提供的手册</p>
+</li>
+</ul>
+<h2 id="第二章-实操类-进程管理"><a href="#第二章-实操类-进程管理" class="headerlink" title="第二章 实操类 进程管理"></a>第二章 实操类 进程管理</h2><h4 id="ps-查看进程的使用指令"><a href="#ps-查看进程的使用指令" class="headerlink" title="ps:查看进程的使用指令"></a><code>ps</code>:查看进程的使用指令</h4><blockquote>
+<p>一般使用的参数是 ps -aux</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">PID</th>
+<th>进程识别号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">TTY</td>
+<td>终端机号</td>
+</tr>
+<tr>
+<td style="text-align:left">TIME</td>
+<td>此进程所消耗的CPU时间</td>
+</tr>
+<tr>
+<td style="text-align:left">CMD</td>
+<td>正在执行的命令或者进程名</td>
+</tr>
+</tbody>
+</table>
+<p>ps -a：显示当前终端的所有进程信息</p>
+<p>ps -u:以用户的格式显示进行信息</p>
+<p>ps -x:显示后台进程运行的参数</p>
+<p>ps -ef:以全格式显示当前的所有进程</p>
+<p><img src="https://img-blog.csdnimg.cn/2020090921563579.png#pic_center" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20200909220004521.png#pic_center" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20200909220229314.png#pic_center" alt="在这里插入图片描述"></p>
+<h4 id="kill-终止进程"><a href="#kill-终止进程" class="headerlink" title="kill:终止进程"></a><code>kill</code>:终止进程</h4><p>kill [进程号]，killall，也可以使用通配符</p>
+<p>-9：表示强迫进程立即停止</p>
+<p>案例1:踢掉某个非法登录用户</p>
+<p><img src="https://img-blog.csdnimg.cn/20200909220619385.png#pic_center" alt="在这里插入图片描述"></p>
+<p>案例2：终止远程登录服务sshd，在适当时候再次重启sshd服务</p>
+<p><img src="C:\Users\charl\AppData\Roaming\Typora\typora-user-images\image-20200909221008105.png" alt="image-20200909221008105"></p>
+<p>案例3：终止多个gedit编辑器</p>
+<p><code>killall gedit</code></p>
+<p>案例4：强制杀掉一个终端</p>
+<p><img src="https://img-blog.csdnimg.cn/20200909221401212.png#pic_center" alt="在这里插入图片描述"></p>
+<h4 id="pstree：查看进程树"><a href="#pstree：查看进程树" class="headerlink" title="pstree：查看进程树"></a>pstree：查看进程树</h4><p>-p:显示进程PID</p>
+<p>-u：显示进程的所有属性</p>
+<p><img src="https://img-blog.csdnimg.cn/20200909221726474.png#pic_center" alt="在这里插入图片描述"></p>
+<h4 id="Service-服务管理"><a href="#Service-服务管理" class="headerlink" title="Service:服务管理"></a><code>Service</code>:服务管理</h4><p>服务本质就是进程，只是运行在后台，通常会监听某个端口，等待其他程序请求，比如（mysql，sshd 防火墙等），因此我们又称为<strong>守护线程</strong>，是Linux中非常重要的知识点</p>
+<p><img src="https://img-blog.csdnimg.cn/20200909222329890.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MTU5MTYx,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>在centos7.0以后，不在使用service，而是systemctl</p>
+<p>使用案例：查看当前防火墙状态，关闭防火墙和重启防火墙</p>
+<p><img src="https://img-blog.csdnimg.cn/20200909222717637.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MTU5MTYx,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h4 id="etc-init-d-服务名称"><a href="#etc-init-d-服务名称" class="headerlink" title="/etc/init.d/服务名称"></a>/etc/init.d/服务名称</h4><p><img src="https://img-blog.csdnimg.cn/20200909222925230.png#pic_center" alt="在这里插入图片描述"></p>
+<p>服务的运行级别：</p>
+<p><img src="C:\Users\charl\AppData\Roaming\Typora\typora-user-images\image-20200909223200299.png" alt="image-20200909223200299"></p>
+<p><code>chkconfig</code>为每个服务的各个运行级别设置自启动/关闭</p>
+<p><img src="https://img-blog.csdnimg.cn/20200909223721239.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MTU5MTYx,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20200909223740444.png#pic_center" alt="在这里插入图片描述"></p>
+<h4 id="top动态监控进程"><a href="#top动态监控进程" class="headerlink" title="top动态监控进程"></a><code>top</code>动态监控进程</h4><p>top与ps命令很相似，都是用来显示正在执行的进程，top的不同在于可以更新正在运行的进程</p>
+<table>
+<thead>
+<tr>
+<th>-d</th>
+<th>指定top命令每隔几秒钟更新，默认是3秒</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-i</td>
+<td>使top不显示闲置和僵死的进程</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>通过指定监控进程ID来仅仅监控某个进程</td>
+</tr>
+<tr>
+<td>-u</td>
+<td>后加用户名即可查看指定的用户</td>
+</tr>
+</tbody>
+</table>
+<p>监控特定用户：</p>
+<p><img src="https://img-blog.csdnimg.cn/20200909224709837.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MTU5MTYx,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>输入top后，回车查看进程，然后输入“k”回车，在输入要结束的进程ID号</p>
+<p><img src="C:\Users\charl\AppData\Roaming\Typora\typora-user-images\image-20200909224941476.png" alt="image-20200909224941476"></p>
+<h4 id="netstat查看系统网络情况"><a href="#netstat查看系统网络情况" class="headerlink" title="netstat查看系统网络情况"></a><code>netstat</code>查看系统网络情况</h4><table>
+<thead>
+<tr>
+<th>-an</th>
+<th>按照一定排列顺序输出</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-p</td>
+<td>显示哪个进程在调用</td>
+</tr>
+</tbody>
+</table>
+<p>   查看系统所有的网络服务</p>
+<p><img src="https://img-blog.csdnimg.cn/20200909225258104.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MTU5MTYx,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>查看服务名为sshd的服务信息</p>
+<p><img src="https://img-blog.csdnimg.cn/20200909225352325.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MTU5MTYx,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>之前查询端口是否被占用一直搞不明白，问了好多人，终于搞懂了，现在总结下：</p>
+<p><strong>1.netstat  -anp  |grep  端口号</strong></p>
+<p>如下，我以3306为例，netstat  -anp  |grep  3306（此处备注下，我是以普通用户操作，故加上了sudo，如果是以root用户操作，不用加sudo即可查看），如下图1：</p>
+<p><img src="https://images2017.cnblogs.com/blog/919962/201707/919962-20170728111009665-1483804266.png" alt="img"></p>
+<p>​                                           图1</p>
+<p>图1中主要看监控状态为LISTEN表示已经被占用，最后一列显示被服务mysqld占用，查看具体端口号，只要有如图这一行就表示被占用了。</p>
+<p><strong>2.netstat  -nultp（此处不用加端口号）</strong></p>
+<p>该命令是查看当前所有已经使用的端口情况，如图2：</p>
+<p><img src="https://images2017.cnblogs.com/blog/919962/201707/919962-20170728111406758-217779688.png" alt="img"></p>
+<h3 id="软连接和硬链接"><a href="#软连接和硬链接" class="headerlink" title="软连接和硬链接"></a>软连接和硬链接</h3><p>软连接：（符号连接）等同于Windows的快捷方式</p>
+<ul>
+<li><p>创建一个软连接<br>注意创建的语法：<code>ln -s</code>是必须的，然后后面跟一个目标文件夹，最后是一个当前目录的软连接名。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[root@server6 ~]# ln -s test_chk/ test_chk_ln</span><br><span class="line">[root@server6 ~]# ll</span><br><span class="line">总用量 84</span><br><span class="line">-rw-------.  1 root root  1257 6月  16 01:17 anaconda-ks.cfg</span><br><span class="line">drwxr-xr-x. 25 root root  4096 11月  1 10:28 azkabanJob</span><br><span class="line">-rw-r--r--.  1 root root 67322 11月  4 10:24 azkabanJob.zip</span><br><span class="line">drwxr-xr-x.  4 root root    37 7月  13 11:01 hadoop_temp</span><br><span class="line">-rw-r--r--.  1 root root    54 7月   4 14:11 HelloLinux.txt</span><br><span class="line">drwxr-xr-x.  2 root root    22 11月  4 10:41 test_chk</span><br><span class="line">lrwxrwxrwx.  1 root root     9 11月  4 10:42 test_chk_ln -&gt; test_chk/</span><br><span class="line">-rw-r--r--.  1 root root    67 10月  8 15:52 zookeeper.out</span><br><span class="line">[root@server6 ~]# cd test_chk_ln/</span><br><span class="line">[root@server6 test_chk_ln]# ll</span><br><span class="line">总用量 4</span><br><span class="line">-rw-r--r--. 1 root root 12 11月  4 10:41 test.txt</span><br><span class="line">[root@server6 test_chk_ln]# cat test.txt </span><br><span class="line">hello spark</span><br><span class="line">[root@server6 test_chk_ln]# ll</span><br><span class="line">总用量 4</span><br><span class="line">-rw-r--r--. 1 root root 12 11月  4 10:41 test.txt</span><br><span class="line">[root@server6 test_chk_ln]# cat test.txt </span><br><span class="line">hello spark</span><br></pre></td></tr></table></figure>
+<p>可以看到软连接文件前面是l其他都是-，-代表文本文件，d代表是一个文件夹，而l就是连接文件</p>
+</li>
+</ul>
+<p><strong>硬连接</strong>：ln 源文件名 连接文件名</p>
+<p><strong>硬链接</strong>：就好像是copy，但是在linux里面就只有一份，这个文件好像多了几条命，</p>
+<p>$$ —- \mathcal{End} —- $$</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/linux/">linux</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/公众号.bmp" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/wechat.jpg" alt="微信"></div>
+</a>
+
+                
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<a class="button is-warning donate" onclick="document.getElementById(&#39;paypal-donate-form&#39;).submit()">
+    <span class="icon is-small">
+        <i class="fab fa-paypal"></i>
+    </span>
+    <span>Paypal</span>
+</a>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" rel="noopener" id="paypal-donate-form">
+    <input type="hidden" name="cmd" value="_donations" />
+    <input type="hidden" name="business" value="1844988765@qq.com" />
+    <input type="hidden" name="currency_code" value="USD" />
+</form>
+
+                
+                
+<a class="button is-danger donate" href="https://github.com/charleschaoyangHan" target="_blank" rel="noopener">
+    <span class="icon is-small">
+        <i class="fab fa-patreon"></i>
+    </span>
+    <span>Patreon</span>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/05/14/命令行与配置/Markdown笔记/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Markdown基础</span>
+            </a>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+</div>
+                
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-4-widescreen  has-order-3 column-right ">
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            阅读推荐
+        </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-12T01:59:21.000Z">2019-07-12</time></div>
+                    <a href="/2019/07/12/leetcode1-50/" class="title has-link-black-ter is-size-6 has-text-weight-normal">leetcode 1-50</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/leetcode/">leetcode</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-05T16:00:00.000Z">2020-06-06</time></div>
+                    <a href="/2020/06/06/数据库/1.数据库基础-DQL/" class="title has-link-black-ter is-size-6 has-text-weight-normal">1.数据库基础—DQL</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/数据库/">数据库</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-08T16:00:00.000Z">2020-06-09</time></div>
+                    <a href="/2020/06/09/数据库/3.数据库的设计/" class="title has-link-black-ter is-size-6 has-text-weight-normal">3.数据库的设计</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/数据库/">数据库</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-07T16:00:00.000Z">2020-06-08</time></div>
+                    <a href="/2020/06/08/数据库/2.数据库基础-DML&DDL /" class="title has-link-black-ter is-size-6 has-text-weight-normal">2.数据库基础-DML&amp;DDL</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/数据库/">数据库</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-05T16:00:00.000Z">2020-06-06</time></div>
+                    <a href="/2020/06/06/数据库/5.常见约束&TCL事务控制语言/" class="title has-link-black-ter is-size-6 has-text-weight-normal">5.常见约束&amp;TCL事务控制语言</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/数据库/">数据库</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+        
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#第一章-实操类-实用指令">
+        <!-- <span class="has-mr-6">1</span> -->
+        <span>第一章 实操类 实用指令</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#1-1文件目录类">
+        <!-- <span class="has-mr-6">1.1</span> -->
+        <span>1.1文件目录类</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#pwd：查看当前所在文件">
+        <!-- <span class="has-mr-6">1.1.1</span> -->
+        <span>pwd：查看当前所在文件</span>
+        </a></li><li>
+        <a class="is-flex" href="#ls：查看当前所在文件夹下内容">
+        <!-- <span class="has-mr-6">1.1.2</span> -->
+        <span>ls：查看当前所在文件夹下内容</span>
+        </a></li><li>
+        <a class="is-flex" href="#cd-目录名-：切换文件夹">
+        <!-- <span class="has-mr-6">1.1.3</span> -->
+        <span>cd [目录名]：切换文件夹</span>
+        </a></li><li>
+        <a class="is-flex" href="#touch-文件名-：如果文件不存在，新建文件">
+        <!-- <span class="has-mr-6">1.1.4</span> -->
+        <span>touch [文件名]：如果文件不存在，新建文件</span>
+        </a></li><li>
+        <a class="is-flex" href="#mkdir-目录名-：创建目录">
+        <!-- <span class="has-mr-6">1.1.5</span> -->
+        <span>mkdir [目录名]：创建目录</span>
+        </a></li><li>
+        <a class="is-flex" href="#rmdir-目录名-：删除空目录">
+        <!-- <span class="has-mr-6">1.1.6</span> -->
+        <span>rmdir[目录名]：删除空目录</span>
+        </a></li><li>
+        <a class="is-flex" href="#rm-文件名-：删除文件名">
+        <!-- <span class="has-mr-6">1.1.7</span> -->
+        <span>rm[文件名]：删除文件名</span>
+        </a></li><li>
+        <a class="is-flex" href="#cp-文件名-或-目录名">
+        <!-- <span class="has-mr-6">1.1.8</span> -->
+        <span>cp [文件名] 或 [目录名]</span>
+        </a></li><li>
+        <a class="is-flex" href="#clear-清屏">
+        <!-- <span class="has-mr-6">1.1.9</span> -->
+        <span>clear :清屏</span>
+        </a></li><li>
+        <a class="is-flex" href="#cat-以只读的格式打开文件">
+        <!-- <span class="has-mr-6">1.1.10</span> -->
+        <span>cat:以只读的格式打开文件</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#1-2搜索查找类">
+        <!-- <span class="has-mr-6">1.2</span> -->
+        <span>1.2搜索查找类</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#find：">
+        <!-- <span class="has-mr-6">1.2.1</span> -->
+        <span>find：</span>
+        </a></li><li>
+        <a class="is-flex" href="#locate">
+        <!-- <span class="has-mr-6">1.2.2</span> -->
+        <span>locate:</span>
+        </a></li><li>
+        <a class="is-flex" href="#grep：过滤查找">
+        <!-- <span class="has-mr-6">1.2.3</span> -->
+        <span>grep：过滤查找</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#1-3压缩和解压类">
+        <!-- <span class="has-mr-6">1.3</span> -->
+        <span>1.3压缩和解压类</span>
+        </a></li><li>
+        <a class="is-flex" href="#1-4-Vim-amp-查看文章">
+        <!-- <span class="has-mr-6">1.4</span> -->
+        <span>1.4 Vim&amp;查看文章</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#第二章-实操类-进程管理">
+        <!-- <span class="has-mr-6">2</span> -->
+        <span>第二章 实操类 进程管理</span>
+        </a><ul class="menu-list"><ul class="menu-list"><li>
+        <a class="is-flex" href="#ps-查看进程的使用指令">
+        <!-- <span class="has-mr-6">2.1.1</span> -->
+        <span>ps:查看进程的使用指令</span>
+        </a></li><li>
+        <a class="is-flex" href="#kill-终止进程">
+        <!-- <span class="has-mr-6">2.1.2</span> -->
+        <span>kill:终止进程</span>
+        </a></li><li>
+        <a class="is-flex" href="#pstree：查看进程树">
+        <!-- <span class="has-mr-6">2.1.3</span> -->
+        <span>pstree：查看进程树</span>
+        </a></li><li>
+        <a class="is-flex" href="#Service-服务管理">
+        <!-- <span class="has-mr-6">2.1.4</span> -->
+        <span>Service:服务管理</span>
+        </a></li><li>
+        <a class="is-flex" href="#etc-init-d-服务名称">
+        <!-- <span class="has-mr-6">2.1.5</span> -->
+        <span>/etc/init.d/服务名称</span>
+        </a></li><li>
+        <a class="is-flex" href="#top动态监控进程">
+        <!-- <span class="has-mr-6">2.1.6</span> -->
+        <span>top动态监控进程</span>
+        </a></li><li>
+        <a class="is-flex" href="#netstat查看系统网络情况">
+        <!-- <span class="has-mr-6">2.1.7</span> -->
+        <span>netstat查看系统网络情况</span>
+        </a></li></ul><li>
+        <a class="is-flex" href="#软连接和硬链接">
+        <!-- <span class="has-mr-6">2.2</span> -->
+        <span>软连接和硬链接</span>
+        </a></li></ul></li></ul>
+            </div>
+        </div>
+    </div>
+
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="linux基础篇" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2021 charles&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'https://github.com/charleschaoyangHan',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

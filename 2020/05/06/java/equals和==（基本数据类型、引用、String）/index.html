@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 3.9.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>equals和&#34;==&#34; - charles&#39;s blog</title>
+
+
+    <meta name="description" content="最近更新： 2020-5-6 equals和==（基本数据类型、引用、String）1. 必备知识： equals方法最初是在所有类的基类Object中进行定义的，源码是 123public boolean equals(Object obj) &amp;#123;      return (this == obj);   	&amp;#125;">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="equals和&quot;==&quot;">
+<meta property="og:url" content="https://github.com/charleschaoyangHan/2020/05/06/java/equals和==（基本数据类型、引用、String）/index.html">
+<meta property="og:site_name" content="charles&#39;s blog">
+<meta property="og:description" content="最近更新： 2020-5-6 equals和==（基本数据类型、引用、String）1. 必备知识： equals方法最初是在所有类的基类Object中进行定义的，源码是 123public boolean equals(Object obj) &amp;#123;      return (this == obj);   	&amp;#125;">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/images/og_image.png">
+<meta property="og:updated_time" content="2020-12-16T12:06:45.674Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="equals和&quot;==&quot;">
+<meta name="twitter:description" content="最近更新： 2020-5-6 equals和==（基本数据类型、引用、String）1. 必备知识： equals方法最初是在所有类的基类Object中进行定义的，源码是 123public boolean equals(Object obj) &amp;#123;      return (this == obj);   	&amp;#125;">
+<meta name="twitter:image" content="https://github.com/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-2-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="equals和&#34;==&#34;" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/categories">Categories</a>
+                
+                <a class="navbar-item"
+                href="/tags">Tags</a>
+                
+                <a class="navbar-item"
+                href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-8-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <!-- <time class="level-item has-text-grey" datetime="2020-05-05T16:00:00.000Z">2020-05-06</time> -->
+                <time class="level-item has-text-grey">写于2020-05-06</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/java语法/">java语法</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    12 分钟 读完 (大约 1764 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                equals和&#34;==&#34;
+            
+        </h1>
+        <div class="content">
+            <p><code>最近更新： 2020-5-6</code></p>
+<h1 id="equals和-（基本数据类型、引用、String）"><a href="#equals和-（基本数据类型、引用、String）" class="headerlink" title="equals和==（基本数据类型、引用、String）"></a>equals和==（基本数据类型、引用、String）</h1><h3 id="1-必备知识："><a href="#1-必备知识：" class="headerlink" title="1. 必备知识："></a>1. 必备知识：</h3><p><img src="https://img-blog.csdnimg.cn/20200923145435903.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MTU5MTYx,size_16,color_FFFFFF,t_70#pic_center" alt="img"></p>
+<p>equals方法最初是在所有类的基类Object中进行定义的，源码是</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">this</span> == obj);   </span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h4 id="1-1-特殊的String"><a href="#1-1-特殊的String" class="headerlink" title="1.1 特殊的String:"></a>1.1 特殊的String:</h4><p>String s=”abce”是一种非常特殊的形式,和new 有本质的区别。它是java中唯一不需要new 就可以产生对象的途径。以String s=”abce”;形式赋值在java中叫直接量,它是在常量池中而不是象new一样放在堆中。这种形式的字符串，在JVM内部发生字符串拘留，即当声明这样的一个字符串后，JVM会在常量池中先查找有有没有一个值为”abcd”的对象,如果有,就会把它赋给当前引用.即原来那个引用和现在这个引用指点向了同一对象,如果没有,则在常量池中新创建一个”abcd”,下一次如果有String s1 = “abcd”;又会将s1指向”abcd”这个对象,即以这形式声明的字符串,只要值相等,任何多个引用都指向同一对象。</p>
+<p>而String s = new String(“abcd”);和其它任何对象一样.每调用一次就产生一个对象，只要它们调用。</p>
+<p>也可以这么理解: String str = “hello”; 先在内存中找是不是有”hello”这个对象,如果有，就让str指向那个”hello”.如果内存里没有”hello”，就创建一个新的对象保存”hello”. String str=new String (“hello”) 就是不管内存里是不是已经有”hello”这个对象，都新建一个对象保存”hello”。</p>
+<p><img src="https://img-blog.csdnimg.cn/20200923154632919.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MTU5MTYx,size_16,color_FFFFFF,t_70#pic_center" alt="img"></p>
+<p>1、两个对象，必然会在堆空间中创建”ab”对象，同时也会在常量池中放”ab”</p>
+<p> 一个对象是：new关键字在堆空间创建的</p>
+<p>  另一个对象是：字符串常量池中的对象”ab”。 字节码指令：ldc</p>
+<p>2、new String(“a”) + new String(“b”)呢？</p>
+<p> 对象1：new StringBuilder()</p>
+<p>对象2： new String(“a”)</p>
+<p> 对象3： 常量池中的”a”</p>
+<p>对象4： new String(“b”)</p>
+<p>对象5： 常量池中的”b”</p>
+<h3 id="一、基本数据类型"><a href="#一、基本数据类型" class="headerlink" title="一、基本数据类型"></a>一、基本数据类型</h3><p><strong>存放位置：</strong>所有的基本dao数据类型全du部是存储在栈里面，速度快。</p>
+<p><strong>equal和==</strong>：数据大小确定，内存空间大小可以分配，<strong>它们是直接按值存放的，所以可以直接</strong>按值访问。他们之间的比较直接选择==，这里直接比较的是他们的值，equal也是一样的。</p>
+<h3 id="二-引用数据类型"><a href="#二-引用数据类型" class="headerlink" title="二.引用数据类型"></a>二.<strong>引用数据类型</strong></h3><ol>
+<li><strong>==</strong>比较两个对象在内存里是不是同一个对象，就是说在内存里的<strong>存储位置</strong>一致。 两个String对象存储的值是一样的，但有可能在内存里存储在不同的地方.</li>
+<li><p><strong>==比较的是引用而equals方法比较的是内容。</strong></p>
+<p>public boolean equals(Object obj)这个方法是由Object对象提供的，可以由子类进行重写。默认的实现只有当对象和自身进行比较时才会返回true,这个时候和==是等价的。<strong>String, BitSet, Date,和File</strong>都对equals方法进行了重写，对两个String对象而言，<strong>值</strong>相等意味着它们包含同样的字符序列。对于基本类型的包装类说，值相等意味着对应的基本类型的值一样。</p>
+</li>
+</ol>
+<h3 id="三、字符串缓冲池"><a href="#三、字符串缓冲池" class="headerlink" title="三、字符串缓冲池"></a>三、字符串缓冲池</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String s1 = <span class="string">"hello"</span>; </span><br><span class="line">String s2 = <span class="string">"hello"</span>; </span><br><span class="line">System.out.println(s1 == s2);<span class="comment">//true </span></span><br><span class="line">System.out.println(s1.equals(s2));<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+<p>原来，程序在运行的时候会创建一个字符串缓冲池（字符串常量池）当使用 s2 = “hello” 这样的表达是创建字符串的时候，程序首先会在字符串常量池寻找，s1先被放到了池中，所以在s2被创建的时候，程序找到了具有相同值的 s1 将s2引用s1所引用的对象”hello”；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String s1 = <span class="string">"hello"</span>; </span><br><span class="line">String s2 = <span class="keyword">new</span> String(<span class="string">"hello"</span>);</span><br><span class="line">System.out.println(s1==s2);<span class="comment">//false</span></span><br><span class="line">System.out.println(s1.equals(s2));<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+<p>然而 第二段程序中，使用了 new 操作符，必然会在堆空间中创建”hello”对象，同时也会在字符串常量池中放”hello”存中（因为已经存在所以没有放）。他们的值相同，但是位置不同，由此他们的地址值发生了改变！</p>
+<h3 id="简单总结："><a href="#简单总结：" class="headerlink" title="简单总结："></a><strong>简单总结：</strong></h3><p><strong>==：</strong></p>
+<p>1、比较的是操作符两端的操作数是否是同一个对象。</p>
+<p>2、两边的操作数必须是同一类型的（可以是父子类之间）才能编译通过。</p>
+<p>3、比较的是<strong>地址</strong>，如果是具体的阿拉伯数字的比较，值相等则为true，如：</p>
+<p>int a=10 与 long b=10L与 double c=10.0都是相同的（为true），因为他们都指向地址为10的堆。</p>
+<p><strong>equals：</strong></p>
+<p>　equals用来比较的是两个对象的内容是否相等，由于所有的类都是继承自java.lang.Object类的，所以适用于所有对象，如果没有对该方法进行重写的话，调用的仍然是Object类中的方法，而Object中的equals方法返回的却是==的判断。</p>
+<p>　　</p>
+<h3 id="equals和-的区别"><a href="#equals和-的区别" class="headerlink" title="equals和==的区别"></a><strong>equals和==的区别</strong></h3><p>equals方法最初是在所有类的基类Object中进行定义的，源码是</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">this</span> == obj);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>由equals的源码可以看出这里定义的equals与==是等效的（Object类中的equals没什么区别），不同的原因就在于有些类（像String、Integer等类）对equals进行了重写，但是没有对equals进行重写的类（比如我们自己写的类）就只能从Object类中继承equals方法，其equals方法与==就也是等效的，除非我们在此类中重写equals。</p>
+<p>　　对equals重新需要注意五点：</p>
+<p>　　1  自反性：对任意引用值X，x.equals(x)的返回值一定为true；</p>
+<p>　　2  对称性：对于任何引用值x,y,当且仅当y.equals(x)返回值为true时，x.equals(y)的返回值一定为true；</p>
+<p>　　3  传递性：如果x.equals(y)=true, y.equals(z)=true,则x.equals(z)=true ；</p>
+<p>　　4  一致性：如果参与比较的对象没任何改变，则对象比较的结果也不应该有任何改变；</p>
+<p>　　5  非空性：任何非空的引用值X，x.equals(null)的返回值一定为false 。</p>
+<p>另外，”==”比”equals”运行速度快,因为”==”只是比较引用。</p>
+<p>$$ —- \mathcal{End} —- $$</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/java/">java</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/公众号.bmp" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/wechat.jpg" alt="微信"></div>
+</a>
+
+                
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<a class="button is-warning donate" onclick="document.getElementById(&#39;paypal-donate-form&#39;).submit()">
+    <span class="icon is-small">
+        <i class="fab fa-paypal"></i>
+    </span>
+    <span>Paypal</span>
+</a>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" rel="noopener" id="paypal-donate-form">
+    <input type="hidden" name="cmd" value="_donations" />
+    <input type="hidden" name="business" value="1844988765@qq.com" />
+    <input type="hidden" name="currency_code" value="USD" />
+</form>
+
+                
+                
+<a class="button is-danger donate" href="https://github.com/charleschaoyangHan" target="_blank" rel="noopener">
+    <span class="icon is-small">
+        <i class="fab fa-patreon"></i>
+    </span>
+    <span>Patreon</span>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/06/06/数据库/5.常见约束&TCL事务控制语言/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">5.常见约束&amp;TCL事务控制语言</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/07/12/leetcode1-50/">
+                <span class="level-item">leetcode 1-50</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-4-widescreen  has-order-3 column-right ">
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            阅读推荐
+        </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-12T01:59:21.000Z">2019-07-12</time></div>
+                    <a href="/2019/07/12/leetcode1-50/" class="title has-link-black-ter is-size-6 has-text-weight-normal">leetcode 1-50</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/leetcode/">leetcode</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-05T16:00:00.000Z">2020-06-06</time></div>
+                    <a href="/2020/06/06/数据库/1.数据库基础-DQL/" class="title has-link-black-ter is-size-6 has-text-weight-normal">1.数据库基础—DQL</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/数据库/">数据库</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-08T16:00:00.000Z">2020-06-09</time></div>
+                    <a href="/2020/06/09/数据库/3.数据库的设计/" class="title has-link-black-ter is-size-6 has-text-weight-normal">3.数据库的设计</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/数据库/">数据库</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-07T16:00:00.000Z">2020-06-08</time></div>
+                    <a href="/2020/06/08/数据库/2.数据库基础-DML&DDL /" class="title has-link-black-ter is-size-6 has-text-weight-normal">2.数据库基础-DML&amp;DDL</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/数据库/">数据库</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-05T16:00:00.000Z">2020-06-06</time></div>
+                    <a href="/2020/06/06/数据库/5.常见约束&TCL事务控制语言/" class="title has-link-black-ter is-size-6 has-text-weight-normal">5.常见约束&amp;TCL事务控制语言</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/数据库/">数据库</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+        
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#equals和-（基本数据类型、引用、String）">
+        <!-- <span class="has-mr-6">1</span> -->
+        <span>equals和==（基本数据类型、引用、String）</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#1-必备知识：">
+        <!-- <span class="has-mr-6">1.1</span> -->
+        <span>1. 必备知识：</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#1-1-特殊的String">
+        <!-- <span class="has-mr-6">1.1.1</span> -->
+        <span>1.1 特殊的String:</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#一、基本数据类型">
+        <!-- <span class="has-mr-6">1.2</span> -->
+        <span>一、基本数据类型</span>
+        </a></li><li>
+        <a class="is-flex" href="#二-引用数据类型">
+        <!-- <span class="has-mr-6">1.3</span> -->
+        <span>二.引用数据类型</span>
+        </a></li><li>
+        <a class="is-flex" href="#三、字符串缓冲池">
+        <!-- <span class="has-mr-6">1.4</span> -->
+        <span>三、字符串缓冲池</span>
+        </a></li><li>
+        <a class="is-flex" href="#简单总结：">
+        <!-- <span class="has-mr-6">1.5</span> -->
+        <span>简单总结：</span>
+        </a></li><li>
+        <a class="is-flex" href="#equals和-的区别">
+        <!-- <span class="has-mr-6">1.6</span> -->
+        <span>equals和==的区别</span>
+        </a></li></ul></li></ul>
+            </div>
+        </div>
+    </div>
+
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="equals和&#34;==&#34;" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2021 charles&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'https://github.com/charleschaoyangHan',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

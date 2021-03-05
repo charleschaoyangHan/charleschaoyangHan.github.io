@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 3.9.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>双向链表java实现 - charles&#39;s blog</title>
+
+
+    <meta name="description" content="一 双向链表简介双向链表的定义是，一个节点有两个方向，分别储存当前节点的前驱节点，和后续节点；双向链表的删除只需要指定前驱节点，或者后续节点就可以进行删除操作；但是缺点也很明显每次添加节点时都需要2个指向，额外增加了内存空间消耗； 二 双向链表的实现3.1 定义链表节点 定义data存储数据，知识追寻者使用的时int类型，读者可以改为object类型； 定义前驱节点previous 定义后续节点n">
+<meta name="keywords" content="leetcode,数据结构与算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="双向链表java实现">
+<meta property="og:url" content="https://github.com/charleschaoyangHan/2020/07/12/数据结构与算法/java实现双向链表/index.html">
+<meta property="og:site_name" content="charles&#39;s blog">
+<meta property="og:description" content="一 双向链表简介双向链表的定义是，一个节点有两个方向，分别储存当前节点的前驱节点，和后续节点；双向链表的删除只需要指定前驱节点，或者后续节点就可以进行删除操作；但是缺点也很明显每次添加节点时都需要2个指向，额外增加了内存空间消耗； 二 双向链表的实现3.1 定义链表节点 定义data存储数据，知识追寻者使用的时int类型，读者可以改为object类型； 定义前驱节点previous 定义后续节点n">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/images/og_image.png">
+<meta property="og:updated_time" content="2021-03-05T02:41:11.198Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="双向链表java实现">
+<meta name="twitter:description" content="一 双向链表简介双向链表的定义是，一个节点有两个方向，分别储存当前节点的前驱节点，和后续节点；双向链表的删除只需要指定前驱节点，或者后续节点就可以进行删除操作；但是缺点也很明显每次添加节点时都需要2个指向，额外增加了内存空间消耗； 二 双向链表的实现3.1 定义链表节点 定义data存储数据，知识追寻者使用的时int类型，读者可以改为object类型； 定义前驱节点previous 定义后续节点n">
+<meta name="twitter:image" content="https://github.com/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-2-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="双向链表java实现" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/categories">Categories</a>
+                
+                <a class="navbar-item"
+                href="/tags">Tags</a>
+                
+                <a class="navbar-item"
+                href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-8-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <!-- <time class="level-item has-text-grey" datetime="2020-07-12T01:59:21.000Z">2020-07-12</time> -->
+                <time class="level-item has-text-grey">写于2020-07-12</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/leetcode/">leetcode</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    12 分钟 读完 (大约 1843 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                双向链表java实现
+            
+        </h1>
+        <div class="content">
+            <h3 id="一-双向链表简介"><a href="#一-双向链表简介" class="headerlink" title="一 双向链表简介"></a>一 双向链表简介</h3><p>双向链表的定义是，一个节点有两个方向，分别储存当前节点的前驱节点，和后续节点；双向链表的删除只需要指定前驱节点，或者后续节点就可以进行删除操作；但是缺点也很明显每次添加节点时都需要2个指向，额外增加了内存空间消耗；</p>
+<h3 id="二-双向链表的实现"><a href="#二-双向链表的实现" class="headerlink" title="二 双向链表的实现"></a>二 双向链表的实现</h3><h4 id="3-1-定义链表节点"><a href="#3-1-定义链表节点" class="headerlink" title="3.1 定义链表节点"></a>3.1 定义链表节点</h4><ol>
+<li>定义data存储数据，知识追寻者使用的时int类型，读者可以改为object类型；</li>
+<li>定义前驱节点previous</li>
+<li>定义后续节点next</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> lsc</span></span><br><span class="line"><span class="comment"> * &lt;p&gt; 双向链表节点 &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DoubleNode</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//数据</span></span><br><span class="line">    <span class="keyword">private</span> Integer data;</span><br><span class="line">    <span class="comment">//后续节点节点</span></span><br><span class="line">    <span class="keyword">private</span> DoubleNode next;</span><br><span class="line">    <span class="comment">//前驱节点</span></span><br><span class="line">    <span class="keyword">private</span> DoubleNode previous;</span><br><span class="line">    <span class="comment">// 省略set get</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="3-2-插入头节点"><a href="#3-2-插入头节点" class="headerlink" title="3.2 插入头节点"></a>3.2 插入头节点</h2><p>思路如下:</p>
+<ol>
+<li>将新节点的前驱节点指向nul</li>
+<li>新节点的后续节点指向表头</li>
+<li>将表头的前驱节点指向新节点</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DoubleList</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">private</span> DoubleNode head;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addFirst</span><span class="params">(<span class="keyword">int</span> data)</span></span>&#123;</span><br><span class="line">       <span class="comment">// 创建新节点</span></span><br><span class="line">       DoubleNode newNode = <span class="keyword">new</span> DoubleNode();</span><br><span class="line">       <span class="comment">// 为新节点添加数据</span></span><br><span class="line">       newNode.setData(data);</span><br><span class="line">       <span class="comment">// 如果表头为空直接将新节点作为头</span></span><br><span class="line">       <span class="keyword">if</span> (head==<span class="keyword">null</span>)&#123;</span><br><span class="line">           head = newNode;</span><br><span class="line">       &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">           <span class="comment">//将新节点的前驱节点指向null(声明的时候本来就是null)</span></span><br><span class="line">           <span class="comment">//新节点的后续节点指向表头</span></span><br><span class="line">           newNode.setNext(head);</span><br><span class="line">           <span class="comment">// 将表头的前驱节点指向新节点</span></span><br><span class="line">           head.setPrevious(newNode);</span><br><span class="line">           <span class="comment">// head重新赋值</span></span><br><span class="line">           head = newNode;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">     <span class="comment">/* *</span></span><br><span class="line"><span class="comment">     * @Author lsc</span></span><br><span class="line"><span class="comment">     * &lt;p&gt;顺序打印链表</span></span><br><span class="line"><span class="comment">      思路：从链表的头遍历到链表的尾巴</span></span><br><span class="line"><span class="comment">     * &lt;/p&gt;</span></span><br><span class="line"><span class="comment">     * @Param []</span></span><br><span class="line"><span class="comment">     * @Return void</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">displayNext</span><span class="params">()</span></span>&#123;</span><br><span class="line">       <span class="comment">// 将表头作为当前节点</span></span><br><span class="line">       DoubleNode currentNode = head;</span><br><span class="line">       <span class="comment">// 遍历链表</span></span><br><span class="line">       <span class="keyword">while</span> (currentNode!=<span class="keyword">null</span>)&#123;</span><br><span class="line">           <span class="comment">// 打印数据</span></span><br><span class="line">           System.out.println(currentNode.getData());</span><br><span class="line">           <span class="comment">// 将下一个节点作为当前节点</span></span><br><span class="line">           currentNode = currentNode.getNext();</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>测试代码如下，往前插入数据，打印出来就是倒序</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      DoubleList doubleList = <span class="keyword">new</span> DoubleList();</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;<span class="number">5</span> ; i++) &#123;</span><br><span class="line">          doubleList.addFirst(i);</span><br><span class="line">      &#125;</span><br><span class="line">      doubleList.displayNext();</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">4</span><br><span class="line">3</span><br><span class="line">2</span><br><span class="line">1</span><br><span class="line">0</span><br></pre></td></tr></table></figure>
+<h2 id="3-3-插入尾节点"><a href="#3-3-插入尾节点" class="headerlink" title="3.3 插入尾节点"></a>3.3 插入尾节点</h2><p>思路如下</p>
+<ol>
+<li>表尾的后续节点指向新节点</li>
+<li>新节点的前驱节点指向表尾</li>
+<li>新节点的后续节点指向null</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* *</span></span><br><span class="line"><span class="comment">     * @Author lsc</span></span><br><span class="line"><span class="comment">     * &lt;p&gt; 表尾插入节点</span></span><br><span class="line"><span class="comment">     * &lt;/p&gt;</span></span><br><span class="line"><span class="comment">     * @Param [data]</span></span><br><span class="line"><span class="comment">     * @Return void</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addLast</span><span class="params">(<span class="keyword">int</span> data)</span></span>&#123;</span><br><span class="line">       <span class="comment">// 创建新节点</span></span><br><span class="line">       DoubleNode newNode = <span class="keyword">new</span> DoubleNode();</span><br><span class="line">       <span class="comment">// 为新节点添加数据</span></span><br><span class="line">       newNode.setData(data);</span><br><span class="line">       <span class="comment">// 如果表头为空直接将新节点作为头</span></span><br><span class="line">       <span class="keyword">if</span> (head==<span class="keyword">null</span>)&#123;</span><br><span class="line">           head = newNode;</span><br><span class="line">       &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">           DoubleNode currentNode = head;</span><br><span class="line">           <span class="comment">//寻找尾节点</span></span><br><span class="line">           <span class="keyword">while</span> (currentNode.getNext()!=<span class="keyword">null</span>)&#123;</span><br><span class="line">               currentNode = currentNode.getNext();</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="comment">//表尾的后续节点指向新节点</span></span><br><span class="line">           currentNode.setNext(newNode);</span><br><span class="line">           <span class="comment">//新节点的前驱节点指向表尾</span></span><br><span class="line">           newNode.setPrevious(currentNode);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>测试代码如下，往表为插入数据，也就是顺序打印</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      DoubleList doubleList = <span class="keyword">new</span> DoubleList();</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;<span class="number">5</span> ; i++) &#123;</span><br><span class="line">          <span class="comment">//doubleList.addFirst(i);</span></span><br><span class="line">          doubleList.addLast(i);</span><br><span class="line">      &#125;</span><br><span class="line">      doubleList.displayNext();</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">0</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td></tr></table></figure>
+<h2 id="3-4-获取链表长度"><a href="#3-4-获取链表长度" class="headerlink" title="3.4 获取链表长度"></a>3.4 获取链表长度</h2><p>思路 ：遍历链表，一个节点代表一个单位的长度</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">/* *</span></span><br><span class="line"><span class="comment">  * @Author lsc</span></span><br><span class="line"><span class="comment">  * &lt;p&gt; 获得链表长度</span></span><br><span class="line"><span class="comment">  * 思路：遍历链表，一个节点代表一个单位的长度</span></span><br><span class="line"><span class="comment">  *  &lt;/p&gt;</span></span><br><span class="line"><span class="comment">  * @Param []</span></span><br><span class="line"><span class="comment">  * @Return int</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">length</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> length = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 当前节点</span></span><br><span class="line">    DoubleNode currentNode = head;</span><br><span class="line">    <span class="keyword">while</span> (currentNode!=<span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="comment">// 一个节点 length 长度就加1</span></span><br><span class="line">         length++;</span><br><span class="line">         <span class="comment">// 将下一个节点作为当前节点</span></span><br><span class="line">         currentNode = currentNode.getNext();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> length;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-5-指定位置插入节点"><a href="#3-5-指定位置插入节点" class="headerlink" title="3.5 指定位置插入节点"></a>3.5 指定位置插入节点</h2><p>思路： 假设在BC直接插入新节点N</p>
+<ol>
+<li>B 节点的后续节点指向 N</li>
+<li>N 节点 的前驱节点指向 B</li>
+<li>N 节点的后续节点指向 C</li>
+<li>C 节点的前驱节点指向 N</li>
+</ol>
+<p>重要的也就是要找到B节点的位置，转存C节点；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* *</span></span><br><span class="line"><span class="comment">    * @Author lsc</span></span><br><span class="line"><span class="comment">    * &lt;p&gt; 指定位置插入节点</span></span><br><span class="line"><span class="comment">    * 思路： 假设在AB直接插入新节点N</span></span><br><span class="line"><span class="comment">    *       1 A 节点的后续节点指向 N</span></span><br><span class="line"><span class="comment">    *       2 N 节点 的前驱节点指向 A</span></span><br><span class="line"><span class="comment">    *       3 N 节点的后续节点指向 B</span></span><br><span class="line"><span class="comment">    *       4 B 节点的前驱节点指向 N</span></span><br><span class="line"><span class="comment">    * 重点也是找到A节点的位置</span></span><br><span class="line"><span class="comment">    *  &lt;/p&gt;</span></span><br><span class="line"><span class="comment">    * @Param [data]</span></span><br><span class="line"><span class="comment">    * @Return void</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> data, <span class="keyword">int</span> index)</span></span>&#123;</span><br><span class="line">       <span class="comment">// 索引超出，非法</span></span><br><span class="line">       <span class="keyword">if</span> (index&lt;<span class="number">0</span> || index&gt;length())&#123;</span><br><span class="line">           System.out.println(<span class="string">"非法索引"</span>);</span><br><span class="line">           <span class="keyword">return</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="comment">// 如果索引为0，调用addFirst方法</span></span><br><span class="line">       <span class="keyword">if</span> (index==<span class="number">0</span>)&#123;</span><br><span class="line">           addFirst(data);</span><br><span class="line">           <span class="keyword">return</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="comment">// 如果索引等于链表的长度，调用addLast方法</span></span><br><span class="line">       <span class="keyword">if</span> (index==length())&#123;</span><br><span class="line">           addLast(data);</span><br><span class="line">           <span class="keyword">return</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="comment">// 创建新节点</span></span><br><span class="line">       DoubleNode newNode = <span class="keyword">new</span> DoubleNode();</span><br><span class="line">       <span class="comment">// 为新节点添加数据</span></span><br><span class="line">       newNode.setData(data);</span><br><span class="line">       <span class="comment">// 当前节点</span></span><br><span class="line">       DoubleNode currentNode = head;</span><br><span class="line">       <span class="comment">// 定义指针</span></span><br><span class="line">       <span class="keyword">int</span> point = <span class="number">0</span>;</span><br><span class="line">       <span class="comment">// 寻找插入新节点的上一个节点A</span></span><br><span class="line">       <span class="keyword">while</span> ((index-<span class="number">1</span>)!= point)&#123;</span><br><span class="line">           currentNode = currentNode.getNext();</span><br><span class="line">           point++;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="comment">// 转存当前节点的后续节点</span></span><br><span class="line">       DoubleNode nextNode = currentNode.getNext();</span><br><span class="line">       <span class="comment">// 当前节点的后续节点指向新节点</span></span><br><span class="line">       currentNode.setNext(newNode);</span><br><span class="line">       <span class="comment">// 新接的前驱节点指向当前节点</span></span><br><span class="line">       newNode.setPrevious(currentNode);</span><br><span class="line">       <span class="comment">// 新节点的后续节点指向转存的节点</span></span><br><span class="line">       newNode.setNext(nextNode);</span><br><span class="line">       <span class="comment">// 转存节点的前驱节点指向新节点</span></span><br><span class="line">       nextNode.setPrevious(newNode);</span><br><span class="line"></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>测试代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    DoubleList doubleList = new DoubleList();</span><br><span class="line">    for (int i = 0; i &lt;5 ; i++) &#123;</span><br><span class="line">        doubleList.addLast(i);</span><br><span class="line">    &#125;</span><br><span class="line">    doubleList.add(666,3);</span><br><span class="line">    doubleList.displayNext();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">0</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">666</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td></tr></table></figure>
+<h2 id="3-6-删除表头"><a href="#3-6-删除表头" class="headerlink" title="3.6 删除表头"></a>3.6 删除表头</h2><p>思路如下</p>
+<ol>
+<li>创建一个临时节点,存储表头的后续节点</li>
+<li>将临时节点的前驱节点指向null</li>
+<li>将临时节点赋值给表头</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* *</span></span><br><span class="line"><span class="comment">   * @Author lsc</span></span><br><span class="line"><span class="comment">   * &lt;p&gt; 删除表头</span></span><br><span class="line"><span class="comment">    思路： 1 创建一个临时节点,存储表头的后续节点</span></span><br><span class="line"><span class="comment">    *     2 将临时节点的前驱节点指向null</span></span><br><span class="line"><span class="comment">    *     3 将临时节点赋值给表头</span></span><br><span class="line"><span class="comment">   * &lt;/p&gt;</span></span><br><span class="line"><span class="comment">   * @Param []</span></span><br><span class="line"><span class="comment">   * @Return void</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">removeFirst</span><span class="params">()</span></span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (length()==<span class="number">0</span>)&#123;</span><br><span class="line">          <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// 只有一个节点直接清空表头</span></span><br><span class="line">      <span class="keyword">if</span> (length()==<span class="number">1</span>)&#123;</span><br><span class="line">          head=<span class="keyword">null</span>;</span><br><span class="line">          <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// 创建一个临时节点,存储表头的后续节点</span></span><br><span class="line">      DoubleNode temNode = head.getNext();</span><br><span class="line">      <span class="comment">// 将临时节点的前驱节点指向null</span></span><br><span class="line">      temNode.setPrevious(<span class="keyword">null</span>);</span><br><span class="line">      <span class="comment">// 将临时节点赋值给表头</span></span><br><span class="line">      head = temNode;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>测试代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    DoubleList doubleList = <span class="keyword">new</span> DoubleList();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;<span class="number">5</span> ; i++) &#123;</span><br><span class="line">        doubleList.addLast(i);</span><br><span class="line">    &#125;</span><br><span class="line">    doubleList.removeFirst();</span><br><span class="line">    doubleList.displayNext();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td></tr></table></figure>
+<h2 id="3-7-删除表尾"><a href="#3-7-删除表尾" class="headerlink" title="3.7 删除表尾"></a>3.7 删除表尾</h2><p>思路</p>
+<ol>
+<li>找到表尾的前驱节点</li>
+<li>将表尾的前驱节点的后续节点置为null</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* *</span></span><br><span class="line"><span class="comment">   * @Author lsc</span></span><br><span class="line"><span class="comment">   * &lt;p&gt; 删除表尾</span></span><br><span class="line"><span class="comment">       思路： 1 找到表尾的前驱节点</span></span><br><span class="line"><span class="comment">       *     2 将表尾的前驱节点的后续节点置为null</span></span><br><span class="line"><span class="comment">       *     3</span></span><br><span class="line"><span class="comment">   * &lt;/p&gt;</span></span><br><span class="line"><span class="comment">   * @Param []</span></span><br><span class="line"><span class="comment">   * @Return void</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">removeLast</span><span class="params">()</span></span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (length()==<span class="number">0</span>)&#123;</span><br><span class="line">           <span class="keyword">return</span>;</span><br><span class="line">       &#125;</span><br><span class="line">      <span class="comment">// 只有一个节点直接清空表头</span></span><br><span class="line">      <span class="keyword">if</span> (length()==<span class="number">1</span>)&#123;</span><br><span class="line">          head=<span class="keyword">null</span>;</span><br><span class="line">          <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      DoubleNode previousNode = head;</span><br><span class="line">      <span class="comment">// 寻找尾节点的前驱节点</span></span><br><span class="line">      <span class="keyword">while</span> (previousNode.getNext().getNext()!=<span class="keyword">null</span>)&#123;</span><br><span class="line">          previousNode = previousNode.getNext();</span><br><span class="line">      &#125;</span><br><span class="line">      previousNode.setNext(<span class="keyword">null</span>);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>测试代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    DoubleList doubleList = <span class="keyword">new</span> DoubleList();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;<span class="number">5</span> ; i++) &#123;</span><br><span class="line">        <span class="comment">//doubleList.addFirst(i);</span></span><br><span class="line">        doubleList.addLast(i);</span><br><span class="line">    &#125;</span><br><span class="line">    doubleList.removeLast();</span><br><span class="line">    doubleList.displayNext();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
+<h2 id="3-8-删除指定节点"><a href="#3-8-删除指定节点" class="headerlink" title="3.8 删除指定节点"></a>3.8 删除指定节点</h2><p>思路： 假设有BCD节点要删除B节点</p>
+<ol>
+<li>将 B 节点的后续节点指向 D节点</li>
+<li>将D节点前驱节点指向B节点</li>
+</ol>
+<p>重要的也就是要找到B节点位置，转存D节点；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* *</span></span><br><span class="line"><span class="comment">    * @Author lsc</span></span><br><span class="line"><span class="comment">    * &lt;p&gt;  指定位置删除节点</span></span><br><span class="line"><span class="comment">      思路： 假设有ABC节点要删除B节点</span></span><br><span class="line"><span class="comment">      *     1 将 A 节点的后续节点指向 C节点</span></span><br><span class="line"><span class="comment">      *     2 将C节点前驱节点指向A节点</span></span><br><span class="line"><span class="comment">    * &lt;/p&gt;</span></span><br><span class="line"><span class="comment">    * @Param [index]</span></span><br><span class="line"><span class="comment">    * @Return void</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">(<span class="keyword">int</span> index)</span></span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (index&lt;<span class="number">0</span> || index&gt;=length())&#123;</span><br><span class="line">           System.out.println(<span class="string">"非法索引"</span>);</span><br><span class="line">           <span class="keyword">return</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="comment">// 头节点</span></span><br><span class="line">       <span class="keyword">if</span> (index==<span class="number">0</span>)&#123;</span><br><span class="line">           removeFirst();</span><br><span class="line">           <span class="keyword">return</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="comment">// 尾节点</span></span><br><span class="line">       <span class="keyword">if</span> (index==(length()-<span class="number">1</span>))&#123;</span><br><span class="line">           removeLast();</span><br><span class="line">           <span class="keyword">return</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="comment">// 欲想删除节点的前驱节点</span></span><br><span class="line">       DoubleNode previousNode = head;</span><br><span class="line">       <span class="comment">// 定义指针</span></span><br><span class="line">       <span class="keyword">int</span> point = <span class="number">0</span>;</span><br><span class="line">       <span class="comment">// 寻找新节</span></span><br><span class="line">       <span class="keyword">while</span> ((index-<span class="number">1</span>)!=point)&#123;</span><br><span class="line">           previousNode = previousNode.getNext();</span><br><span class="line">           point++;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="comment">// 欲想删除节点的后续节点</span></span><br><span class="line">       DoubleNode nextNode = previousNode.getNext().getNext();</span><br><span class="line">       <span class="comment">// 将欲想删除节点的前驱节点的后续节点指向欲想删除节点的后续节点</span></span><br><span class="line">       previousNode.setNext(nextNode);</span><br><span class="line">       <span class="comment">// 将欲想删除节点的后续节点的前驱节点指向欲想删除节点的前驱节点</span></span><br><span class="line">       nextNode.setPrevious(previousNode);</span><br><span class="line"></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>测试代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    DoubleList doubleList = <span class="keyword">new</span> DoubleList();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;<span class="number">5</span> ; i++) &#123;</span><br><span class="line">        <span class="comment">//doubleList.addFirst(i);</span></span><br><span class="line">        doubleList.addLast(i);</span><br><span class="line">    &#125;</span><br><span class="line">    doubleList.remove(<span class="number">3</span>);</span><br><span class="line">    doubleList.displayNext();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">4</span><br></pre></td></tr></table></figure>
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/leetcode/">leetcode</a>, <a class="has-link-grey -link" href="/tags/数据结构与算法/">数据结构与算法</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/公众号.bmp" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/wechat.jpg" alt="微信"></div>
+</a>
+
+                
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<a class="button is-warning donate" onclick="document.getElementById(&#39;paypal-donate-form&#39;).submit()">
+    <span class="icon is-small">
+        <i class="fab fa-paypal"></i>
+    </span>
+    <span>Paypal</span>
+</a>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" rel="noopener" id="paypal-donate-form">
+    <input type="hidden" name="cmd" value="_donations" />
+    <input type="hidden" name="business" value="1844988765@qq.com" />
+    <input type="hidden" name="currency_code" value="USD" />
+</form>
+
+                
+                
+<a class="button is-danger donate" href="https://github.com/charleschaoyangHan" target="_blank" rel="noopener">
+    <span class="icon is-small">
+        <i class="fab fa-patreon"></i>
+    </span>
+    <span>Patreon</span>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/07/12/python/python面向对象/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">python面向对象</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/06/10/数据库/4.变量&存储过程/">
+                <span class="level-item">4.变量&amp;存储过程</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-4-widescreen  has-order-3 column-right ">
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            阅读推荐
+        </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-12T01:59:21.000Z">2019-07-12</time></div>
+                    <a href="/2019/07/12/leetcode1-50/" class="title has-link-black-ter is-size-6 has-text-weight-normal">leetcode 1-50</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/leetcode/">leetcode</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-05T16:00:00.000Z">2020-06-06</time></div>
+                    <a href="/2020/06/06/数据库/1.数据库基础-DQL/" class="title has-link-black-ter is-size-6 has-text-weight-normal">1.数据库基础—DQL</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/数据库/">数据库</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-08T16:00:00.000Z">2020-06-09</time></div>
+                    <a href="/2020/06/09/数据库/3.数据库的设计/" class="title has-link-black-ter is-size-6 has-text-weight-normal">3.数据库的设计</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/数据库/">数据库</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-07T16:00:00.000Z">2020-06-08</time></div>
+                    <a href="/2020/06/08/数据库/2.数据库基础-DML&DDL /" class="title has-link-black-ter is-size-6 has-text-weight-normal">2.数据库基础-DML&amp;DDL</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/数据库/">数据库</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-05T16:00:00.000Z">2020-06-06</time></div>
+                    <a href="/2020/06/06/数据库/5.常见约束&TCL事务控制语言/" class="title has-link-black-ter is-size-6 has-text-weight-normal">5.常见约束&amp;TCL事务控制语言</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/数据库/">数据库</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+        
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><ul class="menu-list"><li>
+        <a class="is-flex" href="#一-双向链表简介">
+        <!-- <span class="has-mr-6">1.1</span> -->
+        <span>一 双向链表简介</span>
+        </a></li><li>
+        <a class="is-flex" href="#二-双向链表的实现">
+        <!-- <span class="has-mr-6">1.2</span> -->
+        <span>二 双向链表的实现</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#3-1-定义链表节点">
+        <!-- <span class="has-mr-6">1.2.1</span> -->
+        <span>3.1 定义链表节点</span>
+        </a></li></ul></li></ul><li>
+        <a class="is-flex" href="#3-2-插入头节点">
+        <!-- <span class="has-mr-6">2</span> -->
+        <span>3.2 插入头节点</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-3-插入尾节点">
+        <!-- <span class="has-mr-6">3</span> -->
+        <span>3.3 插入尾节点</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-4-获取链表长度">
+        <!-- <span class="has-mr-6">4</span> -->
+        <span>3.4 获取链表长度</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-5-指定位置插入节点">
+        <!-- <span class="has-mr-6">5</span> -->
+        <span>3.5 指定位置插入节点</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-6-删除表头">
+        <!-- <span class="has-mr-6">6</span> -->
+        <span>3.6 删除表头</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-7-删除表尾">
+        <!-- <span class="has-mr-6">7</span> -->
+        <span>3.7 删除表尾</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-8-删除指定节点">
+        <!-- <span class="has-mr-6">8</span> -->
+        <span>3.8 删除指定节点</span>
+        </a></li></ul>
+            </div>
+        </div>
+    </div>
+
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="双向链表java实现" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2021 charles&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'https://github.com/charleschaoyangHan',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

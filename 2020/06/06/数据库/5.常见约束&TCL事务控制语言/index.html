@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 3.9.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>5.常见约束&amp;TCL事务控制语言 - charles&#39;s blog</title>
+
+
+    <meta name="description" content="最近更新： 2020-6-6 upds。 常见约束含义：一种限制，用于限制表中的数据，为了保证表中的数据的准确和可靠性">
+<meta name="keywords" content="MySQL,数据库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="5.常见约束&amp;TCL事务控制语言">
+<meta property="og:url" content="https://github.com/charleschaoyangHan/2020/06/06/数据库/5.常见约束&TCL事务控制语言/index.html">
+<meta property="og:site_name" content="charles&#39;s blog">
+<meta property="og:description" content="最近更新： 2020-6-6 upds。 常见约束含义：一种限制，用于限制表中的数据，为了保证表中的数据的准确和可靠性">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/images/og_image.png">
+<meta property="og:updated_time" content="2020-12-16T12:07:49.030Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="5.常见约束&amp;TCL事务控制语言">
+<meta name="twitter:description" content="最近更新： 2020-6-6 upds。 常见约束含义：一种限制，用于限制表中的数据，为了保证表中的数据的准确和可靠性">
+<meta name="twitter:image" content="https://github.com/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-2-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="5.常见约束&amp;TCL事务控制语言" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/categories">Categories</a>
+                
+                <a class="navbar-item"
+                href="/tags">Tags</a>
+                
+                <a class="navbar-item"
+                href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-8-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <!-- <time class="level-item has-text-grey" datetime="2020-06-05T16:00:00.000Z">2020-06-06</time> -->
+                <time class="level-item has-text-grey">写于2020-06-06</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/数据库/">数据库</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    31 分钟 读完 (大约 4582 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                5.常见约束&amp;TCL事务控制语言
+            
+        </h1>
+        <div class="content">
+            <p><code>最近更新： 2020-6-6 upds。</code></p>
+<h2 id="常见约束"><a href="#常见约束" class="headerlink" title="常见约束"></a>常见约束</h2><p><strong>含义：</strong>一种限制，用于限制表中的数据，为了保证表中的数据的准确和可靠性</p>
+<a id="more"></a>
+<p>分类：六大约束<br>   NOT NULL：非空，用于保证该字段的值不能为空<br>   比如姓名、学号等<br>   DEFAULT:默认，用于保证该字段有默认值<br>   比如性别<br>   PRIMARY KEY:<strong>主键</strong>，<strong>用于保证该字段的值具有唯一性，并且非空</strong><br>   比如学号、员工编号等<br>   UNIQUE:唯一，用于保证该字段的值具有唯一性，可以为空<br>   比如座位号<br>   CHECK:检查约束【mysql中不支持】<br>   比如年龄、性别<br>   FOREIGN KEY:外键，用于<strong>限制两个表的关系</strong>，用于保证该字段的值必须来自于主表的关联列的值<br>     <strong>在从表添加外键约束，用于引用主表中某列的值</strong><br>   比如学生表的专业编号，员工表的部门编号，员工表的工种编号</p>
+<p>约束的添加分类：</p>
+<p>列级约束：<br>     六大约束语法上都支持，但外键约束没有效果<br>   表级约束：<br>      除了非空、默认，其他的都支持</p>
+<p>​            保证唯一性  是否允许为空   一个表中可以有多少个    是否允许组合</p>
+<p>   主键   √                     ×                           至多有1个                     √， 但不推荐<br>   唯一   √                      √                           可以有多个                   √， 但不推荐<br><strong>外键：<br>   1、要求在从表设置外键关系<br>   2、从表的外键列的类型和主表的关联列的类型要求一致或兼容，名称无要求<br>   3、主表的关联列必须是一个key（一般是主键或唯一）<br>   4、插入数据时，先插入主表，再插入从表</strong><br>   删除数据时，先删除从表，再删除主表</p>
+<h3 id="一、创建表时添加约束"><a href="#一、创建表时添加约束" class="headerlink" title="一、创建表时添加约束"></a>一、创建表时添加约束</h3><h4 id="1-添加列级约束"><a href="#1-添加列级约束" class="headerlink" title="1.添加列级约束"></a>1.添加列级约束</h4><p>语法：</p>
+<p>直接在字段名和类型后面追加 约束类型即可。</p>
+<p>只支持：默认、非空、主键、唯一</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">USE</span> students;</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> stuinfo;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> stuinfo(</span><br><span class="line">    <span class="keyword">id</span> <span class="built_in">INT</span> PRIMARY <span class="keyword">KEY</span>,<span class="comment">#主键</span></span><br><span class="line">    stuName <span class="built_in">VARCHAR</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">UNIQUE</span>,<span class="comment">#非空</span></span><br><span class="line">    gender <span class="built_in">CHAR</span>(<span class="number">1</span>) <span class="keyword">CHECK</span>(gender=<span class="string">'男'</span> <span class="keyword">OR</span> gender =<span class="string">'女'</span>),<span class="comment">#检查</span></span><br><span class="line">    seat <span class="built_in">INT</span> <span class="keyword">UNIQUE</span>,<span class="comment">#唯一</span></span><br><span class="line">    age <span class="built_in">INT</span> <span class="keyword">DEFAULT</span>  <span class="number">18</span>,<span class="comment">#默认约束</span></span><br><span class="line">    majorId <span class="built_in">INT</span> <span class="keyword">REFERENCES</span> major(<span class="keyword">id</span>)<span class="comment">#外键</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> major(</span><br><span class="line">    <span class="keyword">id</span> <span class="built_in">INT</span> PRIMARY <span class="keyword">KEY</span>,</span><br><span class="line">    majorName <span class="built_in">VARCHAR</span>(<span class="number">20</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>查看stuinfo中的所有索引，包括主键、外键、唯一</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> <span class="keyword">INDEX</span> <span class="keyword">FROM</span> stuinfo;</span><br></pre></td></tr></table></figure>
+<h3 id=""><a href="#" class="headerlink" title=""></a><img src="https://img-blog.csdnimg.cn/20200503160944908.png" alt="img"></h3><h4 id="2-添加表级约束"><a href="#2-添加表级约束" class="headerlink" title="2.添加表级约束"></a>2.添加表级约束</h4><p>语法：在各个字段的最下面<br> 【constraint 约束名】 约束类型(字段名) </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">EXISTS</span> stuinfo;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> stuinfo(</span><br><span class="line">	<span class="keyword">id</span> <span class="built_in">INT</span>,</span><br><span class="line">	stuname <span class="built_in">VARCHAR</span>(<span class="number">20</span>),</span><br><span class="line">	gender <span class="built_in">CHAR</span>(<span class="number">1</span>),</span><br><span class="line">	seat <span class="built_in">INT</span>,</span><br><span class="line">	age <span class="built_in">INT</span>,</span><br><span class="line">	majorid <span class="built_in">INT</span>,</span><br><span class="line">	<span class="keyword">CONSTRAINT</span> pk PRIMARY <span class="keyword">KEY</span>(<span class="keyword">id</span>),<span class="comment">#主键</span></span><br><span class="line">	<span class="keyword">CONSTRAINT</span> uq <span class="keyword">UNIQUE</span>(seat),<span class="comment">#唯一键</span></span><br><span class="line">	<span class="keyword">CONSTRAINT</span> ck <span class="keyword">CHECK</span>(gender =<span class="string">'男'</span> <span class="keyword">OR</span> gender  = <span class="string">'女'</span>),<span class="comment">#检查</span></span><br><span class="line">	<span class="keyword">CONSTRAINT</span> fk_stuinfo_major <span class="keyword">FOREIGN</span> <span class="keyword">KEY</span>(majorid) <span class="keyword">REFERENCES</span> major(<span class="keyword">id</span>)<span class="comment">#外键</span></span><br><span class="line">);</span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">INDEX</span> <span class="keyword">FROM</span> stuinfo;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20200915164247192.png" alt="img"></p>
+<p>#通用的写法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> stuinfo(</span><br><span class="line">    <span class="keyword">id</span> <span class="built_in">INT</span> PRIMARY <span class="keyword">KEY</span>,</span><br><span class="line">    stuname <span class="built_in">VARCHAR</span>(<span class="number">20</span>),</span><br><span class="line">    sex <span class="built_in">CHAR</span>(<span class="number">1</span>),</span><br><span class="line">    age <span class="built_in">INT</span> <span class="keyword">DEFAULT</span> <span class="number">18</span>,</span><br><span class="line">    seat <span class="built_in">INT</span> <span class="keyword">UNIQUE</span>,</span><br><span class="line">    majorid <span class="built_in">INT</span>,</span><br><span class="line">    <span class="keyword">CONSTRAINT</span> fk_stuinfo_major <span class="keyword">FOREIGN</span> <span class="keyword">KEY</span>(majorid) <span class="keyword">REFERENCES</span> major(<span class="keyword">id</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h3 id="二、修改表时添加约束"><a href="#二、修改表时添加约束" class="headerlink" title="二、修改表时添加约束"></a>二、修改表时添加约束</h3><p>1、添加列级约束<br>alter table 表名 modify column 字段名 字段类型 新约束;</p>
+<p>2、添加表级约束<br>alter table 表名 add 【constraint 约束名】 约束类型(字段名) 【外键的引用】;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">EXISTS</span> stuinfo;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> stuinfo(</span><br><span class="line">    <span class="keyword">id</span> <span class="built_in">INT</span>,</span><br><span class="line">    stuname <span class="built_in">VARCHAR</span>(<span class="number">20</span>),</span><br><span class="line">    gender <span class="built_in">CHAR</span>(<span class="number">1</span>),</span><br><span class="line">    seat <span class="built_in">INT</span>,</span><br><span class="line">    age <span class="built_in">INT</span>,</span><br><span class="line">    majorid <span class="built_in">INT</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">DESC</span> stuinfo;</span><br></pre></td></tr></table></figure>
+<h4 id="1-添加非空约束"><a href="#1-添加非空约束" class="headerlink" title="1.添加非空约束"></a>1.添加非空约束</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> stuinfo <span class="keyword">MODIFY</span> <span class="keyword">COLUMN</span> stuname <span class="built_in">VARCHAR</span>(<span class="number">20</span>)  <span class="keyword">NOT</span> <span class="literal">NULL</span>;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20200503221319592.png" alt="img"></p>
+<h4 id="2-添加默认约束"><a href="#2-添加默认约束" class="headerlink" title="2.添加默认约束"></a>2.添加默认约束</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> stuinfo <span class="keyword">MODIFY</span> <span class="keyword">COLUMN</span> age <span class="built_in">INT</span> <span class="keyword">DEFAULT</span> <span class="number">18</span>;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20200503221352726.png" alt="img"></p>
+<h4 id="3-添加主键"><a href="#3-添加主键" class="headerlink" title="3.添加主键"></a>3.添加主键</h4><p>①列级约束（把id添加为主键）</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> stuinfo <span class="keyword">MODIFY</span> <span class="keyword">COLUMN</span> <span class="keyword">id</span> <span class="built_in">INT</span> PRIMARY <span class="keyword">KEY</span>;</span><br></pre></td></tr></table></figure>
+<p>②表级约束（把id添加为主键）</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> stuinfo <span class="keyword">ADD</span> PRIMARY <span class="keyword">KEY</span>(<span class="keyword">id</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="4-添加唯一"><a href="#4-添加唯一" class="headerlink" title="4.添加唯一"></a>4.添加唯一</h4><p>#①列级约束</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> stuinfo <span class="keyword">MODIFY</span> <span class="keyword">COLUMN</span> seat <span class="built_in">INT</span> <span class="keyword">UNIQUE</span>;</span><br></pre></td></tr></table></figure>
+<p>#②表级约束</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> stuinfo <span class="keyword">ADD</span> <span class="keyword">UNIQUE</span>(seat);</span><br></pre></td></tr></table></figure>
+<h4 id="5-添加外键"><a href="#5-添加外键" class="headerlink" title="5.添加外键"></a>5.添加外键</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> stuinfo <span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> fk_stuinfo_major <span class="keyword">FOREIGN</span> <span class="keyword">KEY</span>(majorid) <span class="keyword">REFERENCES</span> major(<span class="keyword">id</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="三、修改表时删除约束"><a href="#三、修改表时删除约束" class="headerlink" title="三、修改表时删除约束"></a>三、修改表时删除约束</h3><h4 id="1-删除非空约束"><a href="#1-删除非空约束" class="headerlink" title="1.删除非空约束"></a>1.删除非空约束</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> stuinfo <span class="keyword">MODIFY</span> <span class="keyword">COLUMN</span> stuname <span class="built_in">VARCHAR</span>(<span class="number">20</span>) <span class="literal">NULL</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="2-删除默认约束，相当于又加了一遍的感觉"><a href="#2-删除默认约束，相当于又加了一遍的感觉" class="headerlink" title="2.删除默认约束，相当于又加了一遍的感觉"></a>2.删除默认约束，相当于又加了一遍的感觉</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> stuinfo <span class="keyword">MODIFY</span> <span class="keyword">COLUMN</span> age <span class="built_in">INT</span> ;</span><br></pre></td></tr></table></figure>
+<h4 id="3-删除主键"><a href="#3-删除主键" class="headerlink" title="3.删除主键"></a>3.删除主键</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> stuinfo <span class="keyword">DROP</span> PRIMARY <span class="keyword">KEY</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="4-删除唯一"><a href="#4-删除唯一" class="headerlink" title="4.删除唯一"></a>4.删除唯一</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> stuinfo <span class="keyword">DROP</span> <span class="keyword">INDEX</span> seat;</span><br></pre></td></tr></table></figure>
+<h4 id="5-删除外键"><a href="#5-删除外键" class="headerlink" title="5.删除外键"></a>5.删除外键</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> stuinfo <span class="keyword">DROP</span> <span class="keyword">FOREIGN</span> <span class="keyword">KEY</span> fk_stuinfo_major;</span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">INDEX</span> <span class="keyword">FROM</span> stuinfo;</span><br></pre></td></tr></table></figure>
+<h3 id="标识列"><a href="#标识列" class="headerlink" title="标识列"></a>标识列</h3><p>又称为自增长列<br>含义：可以不用手动的插入值，系统提供默认的序列值<br><strong>特点：</strong><br>1、标识列必须和主键搭配吗？不一定，但要求是一个key<br>2、一个表可以有几个标识列？至多一个！<br>3、标识列的类型只能是数值型<br>4、标识列可以通过 SET auto_increment_increment=3;设置步长<br>可以通过 手动插入值，设置起始值</p>
+<p>一、创建表时设置标识列</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">EXISTS</span> tab_identity;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> tab_identity(</span><br><span class="line">	<span class="keyword">id</span> <span class="built_in">INT</span>  primary <span class="keyword">key</span> auto_increment,</span><br><span class="line">	<span class="keyword">NAME</span> <span class="built_in">varchar</span>(<span class="number">20</span>)</span><br><span class="line">);</span><br><span class="line"><span class="keyword">TRUNCATE</span> <span class="keyword">TABLE</span> tab_identity;</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> tab_identity(<span class="keyword">id</span>,<span class="keyword">NAME</span>) <span class="keyword">VALUES</span>(<span class="literal">null</span>,<span class="string">'john'</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> tab_identity(<span class="keyword">NAME</span>) <span class="keyword">VALUES</span>(<span class="string">'lucy'</span>);</span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> tab_identity;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20200504101459425.png" alt="img"></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">TRUNCATE</span> <span class="keyword">TABLE</span> tab_identity;</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> tab_identity(<span class="keyword">id</span>,<span class="keyword">NAME</span>) <span class="keyword">VALUES</span>(<span class="literal">NULL</span>,<span class="string">'john'</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> tab_identity(<span class="keyword">NAME</span>) <span class="keyword">VALUES</span>(<span class="string">'lucy'</span>);</span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> tab_identity;</span><br></pre></td></tr></table></figure>
+<p>设置步长和起始值（MySQL不支持）</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> <span class="keyword">VARIABLES</span> <span class="keyword">LIKE</span> <span class="string">'%auto_increment%'</span>;</span><br></pre></td></tr></table></figure>
+<p>设置步长值为3：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> auto_increment_increment=<span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20200504101830294.png" alt="img"></p>
+<h2 id="TCL-Transaction-Control-Language-事务控制语言"><a href="#TCL-Transaction-Control-Language-事务控制语言" class="headerlink" title="TCL-Transaction Control Language 事务控制语言"></a>TCL-Transaction Control Language 事务控制语言</h2><p><strong>事务：</strong><br>一个或一组sql语句组成一个执行单元，这个执行单元要么全部执行，要么全部不执行。</p>
+<p>案例：转账</p>
+<p>张三丰  1000<br>郭襄   1000</p>
+<p><strong>存储引擎：</strong></p>
+<p>1、数据用不同的存储技术进行存储，也称为表类型；</p>
+<p>2、通过show engines;来查看mysql支持的存储引擎</p>
+<p>3、mysql主流的存储引擎是innodb、myisam、memory，但是后两者不支持事务；</p>
+<p>update 表 set 张三丰的余额=500 where name=’张三丰’<br>意外<br>update 表 set 郭襄的余额=1500 where name=’郭襄’</p>
+<p><strong>事务的特性：</strong><br>ACID<br><strong>原子性：一个事务不可再分割，要么都执行要么都不执行<br>一致性：一个事务执行会使数据从一个一致状态切换到另外一个一致状态<br>隔离性：一个事务的执行不受其他事务的干扰<br>持久性：一个事务一旦提交，则会永久的改变数据库的数据.</strong></p>
+<p><strong>事务的创建</strong><br><strong>隐式事务：</strong>事务没有明显的开启和结束的标记<br>比如insert、update、delete语句</p>
+<p>delete from 表 where id =1;</p>
+<p>但是很多时候，隐式事务不能够处理我们的问题，例如不能够同时执行这两条语句</p>
+<p>update 表 set 张=500；</p>
+<p>update 表 set 李=1500；</p>
+<p><strong>显式事务</strong>：事务具有明显的开启和结束的标记<br>前提：必须先设置自动提交功能为禁用</p>
+<p>开启显示事务，只针对当前这一次有效：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> autocommit=<span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+<p>步骤1：开启事务<br>set autocommit=0;<br>start transaction;可选的（上面的可以不写，因为写了这句就代表开启了上面那句）<br>步骤2：编写事务中的sql语句(select insert update delete)像create drop Alter 没有事务之说；<br>语句1;<br>语句2;<br>…</p>
+<p>步骤3：结束事务<br>commit;提交事务<br>rollback;回滚事务，单纯的MySQL是做不到的，必须结合应用程序来进行</p>
+<p>1.演示事务的使用步骤</p>
+<p>开启事务</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> autocommit=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">START</span> <span class="keyword">TRANSACTION</span>;</span><br></pre></td></tr></table></figure>
+<p>编写一组事务的语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> <span class="keyword">account</span> <span class="keyword">SET</span> balance = <span class="number">1000</span> <span class="keyword">WHERE</span> username=<span class="string">'张无忌'</span>;</span><br><span class="line"><span class="keyword">UPDATE</span> <span class="keyword">account</span> <span class="keyword">SET</span> balance = <span class="number">1000</span> <span class="keyword">WHERE</span> username=<span class="string">'赵敏'</span>;</span><br></pre></td></tr></table></figure>
+<p>结束事务，回滚和提交都可以</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ROLLBACK</span>;</span><br><span class="line"><span class="comment">#commit;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">account</span>;</span><br></pre></td></tr></table></figure>
+<p>但你没有结束事务之前，文件的修改都保留在内存，只有进行了提交才真正的写到了硬盘</p>
+<h3 id="1-事务的隔离级别"><a href="#1-事务的隔离级别" class="headerlink" title="1. 事务的隔离级别"></a>1. 事务的隔离级别</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>脏读</th>
+<th>不可重复读</th>
+<th>幻读</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>read uncommited</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>read commited</td>
+<td>×</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>repeatable read</td>
+<td>×</td>
+<td>×</td>
+<td>√</td>
+</tr>
+<tr>
+<td>serializable</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+</tr>
+</tbody>
+</table>
+<p><img src="https://img-blog.csdnimg.cn/20200504122837341.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MTU5MTYx,size_16,color_FFFFFF,t_70" alt="img"></p>
+<p><img src="C:\Users\charl\AppData\Roaming\Typora\typora-user-images\image-20200917161126006.png" alt="image-20200917161126006"></p>
+<p>脏读一般针对的是更新，例如update和rollback</p>
+<p>不可重复读：也是对于更新，表示前后两次导致值不同</p>
+<p>幻读：针对着是插入和删除，与脏读的相同点都是：没有提交，</p>
+<p>mysql中默认 第三个隔离级别 repeatable read<br>oracle中默认第二个隔离级别 read committed查看当前的隔离级别：</p>
+<p><img src="https://img-blog.csdnimg.cn/20200504142742665.png" alt="img"></p>
+<p>1.设置为最低的隔离级别——READ-UNCOMMITTED</p>
+<p>set session transaction isolation level read uncommitted;</p>
+<p><img src="https://img-blog.csdnimg.cn/20200504143026108.png" alt="img"></p>
+<p>开启事物：</p>
+<p>set autocommit=0;</p>
+<p><img src="https://img-blog.csdnimg.cn/20200504145051774.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MTU5MTYx,size_16,color_FFFFFF,t_70" alt="img"></p>
+<h4 id="1-脏读演示"><a href="#1-脏读演示" class="headerlink" title="1. 脏读演示:"></a>1. 脏读演示:</h4><p>左表还没有提交，右边就可以看到数据修改内容（将张无忌替换为了join）</p>
+<p><img src="https://img-blog.csdnimg.cn/20200504145503278.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MTU5MTYx,size_16,color_FFFFFF,t_70" alt="img"></p>
+<p>数据回滚：rollback；</p>
+<p>此时又将join变为了张无忌</p>
+<p><img src="https://img-blog.csdnimg.cn/20200504145741988.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MTU5MTYx,size_16,color_FFFFFF,t_70" alt="img"></p>
+<p>这个数据也可以叫做不可重复数据，因为在这种情况下三种并发问题都可以出现：</p>
+<p><img src="https://img-blog.csdnimg.cn/20200504150848922.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MTU5MTYx,size_16,color_FFFFFF,t_70" alt="img"></p>
+<h4 id="2-切换隔离级别为read-committed"><a href="#2-切换隔离级别为read-committed" class="headerlink" title="2. 切换隔离级别为read committed;"></a>2. 切换隔离级别为read committed;</h4><p><strong>避免了脏读，但是没有避免不可重复读</strong></p>
+<p>set session transaction isolation level read committed;</p>
+<p>左边已经修改了数据，为”张飞“，以为没有提交，所以右边没有改变，没有出现脏读：</p>
+<p><img src="https://img-blog.csdnimg.cn/20200504151925463.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MTU5MTYx,size_16,color_FFFFFF,t_70" alt="img"></p>
+<p><strong>不可重复读：</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/20200918141011860.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MTU5MTYx,size_16,color_FFFFFF,t_70" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>总结：repeatable commited可以解决脏读但是解决不了，幻读和不可重复读</p>
+<h4 id="3-切换隔离级别为repeatable-read"><a href="#3-切换隔离级别为repeatable-read" class="headerlink" title="3. 切换隔离级别为repeatable read"></a>3. 切换隔离级别为repeatable read</h4><p> set session transaction isolation level repeatable read;</p>
+<p>解决了脏读（在未提交之前）和不可重复读（提交前后）：</p>
+<p><img src="https://img-blog.csdnimg.cn/20200918141640566.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MTU5MTYx,size_16,color_FFFFFF,t_70" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>解决了提交事务查询才会变为刘备：</p>
+<p><img src="https://img-blog.csdnimg.cn/20200504152552370.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MTU5MTYx,size_16,color_FFFFFF,t_70" alt="img"></p>
+<p>未解决幻读：幻读就是针对插入的</p>
+<p>左边开启一个事务，右边执行了一个事务，在左边会发生一个莫名的变化（明明看到的是三行却有四行受到了影响）：</p>
+<p><img src="https://img-blog.csdnimg.cn/20200918142328377.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MTU5MTYx,size_16,color_FFFFFF,t_70" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h4 id="4-事物隔离级别为serializable"><a href="#4-事物隔离级别为serializable" class="headerlink" title="4. 事物隔离级别为serializable;"></a>4. 事物隔离级别为serializable;</h4><p>set session transaction isolation level serializable;</p>
+<p><img src="https://img-blog.csdnimg.cn/20200918143750862.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MTU5MTYx,size_16,color_FFFFFF,t_70" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h3 id="2-演示事务对于delete和truncate的处理的区别"><a href="#2-演示事务对于delete和truncate的处理的区别" class="headerlink" title="2. 演示事务对于delete和truncate的处理的区别"></a>2. 演示事务对于delete和truncate的处理的区别</h3><p><strong>delete可以成功回滚，truncate不支持回滚</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> autocommit=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">START</span> <span class="keyword">TRANSACTION</span>;</span><br><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> <span class="keyword">account</span>;</span><br><span class="line"><span class="keyword">ROLLBACK</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="3-演示savepoint-的使用（有些像编程中的断点）"><a href="#3-演示savepoint-的使用（有些像编程中的断点）" class="headerlink" title="3. 演示savepoint 的使用（有些像编程中的断点）"></a>3. 演示savepoint 的使用（有些像编程中的断点）</h3><p>设置了SAVEPOINT a;#设置保存点，ROLLBACK TO a;#回滚到保存点,25删除了，因为rollback所以28又回来了</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> autocommit=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">START</span> <span class="keyword">TRANSACTION</span>;</span><br><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> <span class="keyword">account</span> <span class="keyword">WHERE</span> <span class="keyword">id</span>=<span class="number">25</span>;</span><br><span class="line"><span class="keyword">SAVEPOINT</span> a;<span class="comment">#设置保存点</span></span><br><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> <span class="keyword">account</span> <span class="keyword">WHERE</span> <span class="keyword">id</span>=<span class="number">28</span>;</span><br><span class="line"><span class="keyword">ROLLBACK</span> <span class="keyword">TO</span> a;<span class="comment">#回滚到保存点</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">account</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h2><p>含义：虚拟表，和普通表一样使用，比如：舞蹈班和普通班级的对比，舞蹈班是临时的，但是普通班是一直存在的<br>mysql5.1版本出现的新特性，是通过表动态生成的数据</p>
+<p>视图的好处：</p>
+<ul>
+<li>重用SQL语句；</li>
+<li>简化了复杂的aql操作，不必知道查询细节；</li>
+<li><p>保护数据，提高安全性；</p>
+<p> 创建语法的关键字   是否实际占用物理空间   使用</p>
+</li>
+</ul>
+<p>视图   create view     只是保存了sql逻辑   增删改查，只是一般不能增删改</p>
+<p>表   create table     保存了数据     增删改查</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>创建语法的关键字</th>
+<th>是否实际占用物理空间</th>
+<th>使用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>视图</td>
+<td>create view</td>
+<td>没有（只是保存了逻辑）</td>
+<td>增删改查，一般不能增删改</td>
+</tr>
+<tr>
+<td>表</td>
+<td>create table</td>
+<td>占用</td>
+<td>增删改查</td>
+</tr>
+</tbody>
+</table>
+<p>#案例：查询姓张的学生名和专业名</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> stuname,majorname</span><br><span class="line"><span class="keyword">FROM</span> stuinfo s</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> major m <span class="keyword">ON</span> s.<span class="string">`majorid`</span>= m.<span class="string">`id`</span></span><br><span class="line"><span class="keyword">WHERE</span> s.<span class="string">`stuname`</span> <span class="keyword">LIKE</span> <span class="string">'张%'</span>;</span><br></pre></td></tr></table></figure>
+<p>做成一个视图：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> v1</span><br><span class="line"><span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> stuname,majorname</span><br><span class="line"><span class="keyword">FROM</span> stuinfo s</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> major m <span class="keyword">ON</span> s.<span class="string">`majorid`</span>= m.<span class="string">`id`</span>;</span><br></pre></td></tr></table></figure>
+<p>此时在查询就很方便了</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> v1 <span class="keyword">WHERE</span> stuname <span class="keyword">LIKE</span> <span class="string">'张%'</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="一、创建视图"><a href="#一、创建视图" class="headerlink" title="一、创建视图"></a>一、创建视图</h4><p>语法：<br>create view 视图名<br>as<br>查询语句;</p>
+<p>USE myemployees;</p>
+<h5 id="1-查询姓名中包含a字符的员工名、部门名和工种信息"><a href="#1-查询姓名中包含a字符的员工名、部门名和工种信息" class="headerlink" title="1.查询姓名中包含a字符的员工名、部门名和工种信息"></a>1.查询姓名中包含a字符的员工名、部门名和工种信息</h5><p>①创建</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> myv1</span><br><span class="line"><span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> last_name,department_name,job_title</span><br><span class="line"><span class="keyword">FROM</span> employees e</span><br><span class="line"><span class="keyword">JOIN</span> departments d <span class="keyword">ON</span> e.department_id  = d.department_id</span><br><span class="line"><span class="keyword">JOIN</span> jobs j <span class="keyword">ON</span> j.job_id  = e.job_id;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20200505105051666.png" alt="img"></p>
+<p>②使用</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> myv1 <span class="keyword">WHERE</span> last_name <span class="keyword">LIKE</span> <span class="string">'%a%'</span>;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/2020050510392390.png" alt="img"></p>
+<h5 id="2-查询各部门的平均工资级别"><a href="#2-查询各部门的平均工资级别" class="headerlink" title="2.查询各部门的平均工资级别"></a>2.查询各部门的平均工资级别</h5><p>①创建视图查看每个部门的平均工资，因为没有grade_level就没有生成结果</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> myv2</span><br><span class="line"><span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">AVG</span>(salary) ag,department_id</span><br><span class="line"><span class="keyword">FROM</span> employees</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> department_id;</span><br></pre></td></tr></table></figure>
+<p>②使用</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> myv2.<span class="string">`ag`</span>,g.grade_level</span><br><span class="line"><span class="keyword">FROM</span> myv2</span><br><span class="line"><span class="keyword">JOIN</span> job_grades g</span><br><span class="line"><span class="keyword">ON</span> myv2.<span class="string">`ag`</span> <span class="keyword">BETWEEN</span> g.<span class="string">`lowest_sal`</span> <span class="keyword">AND</span> g.<span class="string">`highest_sal`</span>;</span><br></pre></td></tr></table></figure>
+<h5 id="3-查询平均工资最低的部门信息，升序排列，只选择第一个1"><a href="#3-查询平均工资最低的部门信息，升序排列，只选择第一个1" class="headerlink" title="3.查询平均工资最低的部门信息，升序排列，只选择第一个1"></a>3.查询平均工资最低的部门信息，升序排列，只选择第一个1</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> myv2 <span class="keyword">ORDER</span> <span class="keyword">BY</span> ag <span class="keyword">LIMIT</span> <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20200505103637164.png" alt="img"></p>
+<h5 id="4-查询平均工资最低的部门名和工资"><a href="#4-查询平均工资最低的部门名和工资" class="headerlink" title="4.查询平均工资最低的部门名和工资"></a>4.查询平均工资最低的部门名和工资</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> myv3</span><br><span class="line"><span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> myv2 <span class="keyword">ORDER</span> <span class="keyword">BY</span> ag <span class="keyword">LIMIT</span> <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> d.*,m.ag</span><br><span class="line"><span class="keyword">FROM</span> myv3 m</span><br><span class="line"><span class="keyword">JOIN</span> departments d</span><br><span class="line"><span class="keyword">ON</span> m.<span class="string">`department_id`</span>=d.<span class="string">`department_id`</span>;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20200505104535704.png" alt="img"></p>
+<h4 id="二、视图的修改"><a href="#二、视图的修改" class="headerlink" title="二、视图的修改"></a>二、视图的修改</h4><p>方式一：</p>
+<p>create or replace view  视图名<br>as<br>查询语句;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> myv3;</span><br></pre></td></tr></table></figure>
+<p>下面是修改语句，进行修改之后，再次查询，就发生了变化</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">OR</span> <span class="keyword">REPLACE</span> <span class="keyword">VIEW</span> myv3</span><br><span class="line"><span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">AVG</span>(salary),job_id</span><br><span class="line"><span class="keyword">FROM</span> employees</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> job_id;</span><br></pre></td></tr></table></figure>
+<p>方式二：</p>
+<p>语法：<br>alter view 视图名<br>as<br>查询语句;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">VIEW</span> myv3</span><br><span class="line"><span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> employees;</span><br></pre></td></tr></table></figure>
+<h4 id="三、删除视图"><a href="#三、删除视图" class="headerlink" title="三、删除视图"></a>三、删除视图</h4><p>语法：drop view 视图名,视图名,…;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">VIEW</span> emp_v1,emp_v2,myv3;</span><br></pre></td></tr></table></figure>
+<h4 id="四、查看视图"><a href="#四、查看视图" class="headerlink" title="四、查看视图"></a>四、查看视图</h4><p>DESC myv3;</p>
+<p>SHOW CREATE VIEW myv3;</p>
+<p><img src="https://img-blog.csdnimg.cn/20200505105904766.png" alt="img"></p>
+<h4 id="案例讲解"><a href="#案例讲解" class="headerlink" title="案例讲解"></a>案例讲解</h4><p>#一、创建视图emp_v1,要求查询电话号码以‘011’开头的员工姓名和工资、邮箱</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">OR</span> <span class="keyword">REPLACE</span> <span class="keyword">VIEW</span> emp_v1</span><br><span class="line"><span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> last_name,salary,email</span><br><span class="line"><span class="keyword">FROM</span> employees</span><br><span class="line"><span class="keyword">WHERE</span> phone_number <span class="keyword">LIKE</span> <span class="string">'011%'</span>;</span><br></pre></td></tr></table></figure>
+<p>#二、创建视图emp_v2，要求查询部门的最高工资高于12000的部门信息</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">OR</span> <span class="keyword">REPLACE</span> <span class="keyword">VIEW</span> emp_v2</span><br><span class="line"><span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">MAX</span>(salary) mx_dep,department_id</span><br><span class="line"><span class="keyword">FROM</span> employees</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> department_id</span><br><span class="line"><span class="keyword">HAVING</span> <span class="keyword">MAX</span>(salary)&gt;<span class="number">12000</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> d.*,m.mx_dep</span><br><span class="line"><span class="keyword">FROM</span> departments d</span><br><span class="line"><span class="keyword">JOIN</span> emp_v2 m</span><br><span class="line"><span class="keyword">ON</span> m.department_id = d.<span class="string">`department_id`</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="五、视图的更新"><a href="#五、视图的更新" class="headerlink" title="五、视图的更新"></a>五、视图的更新</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">OR</span> <span class="keyword">REPLACE</span> <span class="keyword">VIEW</span> myv1</span><br><span class="line"><span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> last_name,email,salary*<span class="number">12</span>*(<span class="number">1</span>+<span class="keyword">IFNULL</span>(commission_pct,<span class="number">0</span>)) <span class="string">"annual salary"</span></span><br><span class="line"><span class="keyword">FROM</span> employees;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">OR</span> <span class="keyword">REPLACE</span> <span class="keyword">VIEW</span> myv1</span><br><span class="line"><span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> last_name,email</span><br><span class="line"><span class="keyword">FROM</span> employees;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> myv1;</span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> employees;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20200505110304935.png" alt="img"></p>
+<h5 id="1-插入"><a href="#1-插入" class="headerlink" title="1.插入"></a>1.插入</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> myv1 <span class="keyword">VALUES</span>(<span class="string">'张飞'</span>,<span class="string">'zf@qq.com'</span>);</span><br></pre></td></tr></table></figure>
+<h5 id="2-修改"><a href="#2-修改" class="headerlink" title="2.修改"></a>2.修改</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> myv1 <span class="keyword">SET</span> last_name = <span class="string">'张无忌'</span> <span class="keyword">WHERE</span> last_name=<span class="string">'张飞'</span>;</span><br></pre></td></tr></table></figure>
+<h5 id="3-删除"><a href="#3-删除" class="headerlink" title="3.删除"></a>3.删除</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> myv1 <span class="keyword">WHERE</span> last_name = <span class="string">'张无忌'</span>;</span><br></pre></td></tr></table></figure>
+<h5 id="具备以下特点的视图不允许更新"><a href="#具备以下特点的视图不允许更新" class="headerlink" title="具备以下特点的视图不允许更新"></a>具备以下特点的视图不允许更新</h5><p>①包含以下关键字的sql语句：分组函数、distinct、group  by、having、union或者union all</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">OR</span> <span class="keyword">REPLACE</span> <span class="keyword">VIEW</span> myv1</span><br><span class="line"><span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">MAX</span>(salary) m,department_id</span><br><span class="line"><span class="keyword">FROM</span> employees</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> department_id;</span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> myv1;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20200505111708124.png" alt="img"></p>
+<p>更新,不可以执行，因为包含GROUP BY:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> myv1 <span class="keyword">SET</span> m=<span class="number">9000</span> <span class="keyword">WHERE</span> department_id=<span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+<p>②常量视图</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">OR</span> <span class="keyword">REPLACE</span> <span class="keyword">VIEW</span> myv2</span><br><span class="line"><span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="string">'john'</span> <span class="keyword">NAME</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> myv2;</span><br></pre></td></tr></table></figure>
+<p>更新,不可以执行，因为包含常量：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> myv2 <span class="keyword">SET</span> <span class="keyword">NAME</span>=<span class="string">'lucy'</span>;</span><br></pre></td></tr></table></figure>
+<p>③Select中包含子查询</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">OR</span> <span class="keyword">REPLACE</span> <span class="keyword">VIEW</span> myv3</span><br><span class="line"><span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> (<span class="keyword">SELECT</span> <span class="keyword">MAX</span>(salary) <span class="keyword">FROM</span> employees) 最高工资;</span><br></pre></td></tr></table></figure>
+<p>更新<br>SELECT * FROM myv3;<br><img src="https://img-blog.csdnimg.cn/20200505112358366.png" alt="img"></p>
+<p>UPDATE myv3 SET 最高工资=100000;不可以</p>
+<p>④join</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">OR</span> <span class="keyword">REPLACE</span> <span class="keyword">VIEW</span> myv4</span><br><span class="line"><span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> last_name,department_name</span><br><span class="line"><span class="keyword">FROM</span> employees e</span><br><span class="line"><span class="keyword">JOIN</span> departments d</span><br><span class="line"><span class="keyword">ON</span> e.department_id  = d.department_id;</span><br></pre></td></tr></table></figure>
+<p>更新,不可以执行，因为包含JOIN：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> myv4;</span><br><span class="line"><span class="keyword">UPDATE</span> myv4 <span class="keyword">SET</span> last_name  = <span class="string">'张飞'</span> <span class="keyword">WHERE</span> last_name=<span class="string">'Whalen'</span>;</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> myv4 <span class="keyword">VALUES</span>(<span class="string">'陈真'</span>,<span class="string">'xxxx'</span>);</span><br></pre></td></tr></table></figure>
+<p>⑤from一个不能更新的视图</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">OR</span> <span class="keyword">REPLACE</span> <span class="keyword">VIEW</span> myv5</span><br><span class="line"><span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> myv3;</span><br></pre></td></tr></table></figure>
+<p>更新,不可以执行，因为包含不可以更新的视图</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> myv5;</span><br><span class="line"><span class="keyword">UPDATE</span> myv5 <span class="keyword">SET</span> 最高工资=<span class="number">10000</span> <span class="keyword">WHERE</span> department_id=<span class="number">60</span>;</span><br></pre></td></tr></table></figure>
+<p>⑥where子句的子查询引用了from子句中的表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">OR</span> <span class="keyword">REPLACE</span> <span class="keyword">VIEW</span> myv6</span><br><span class="line"><span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> last_name,email,salary</span><br><span class="line"><span class="keyword">FROM</span> employees</span><br><span class="line"><span class="keyword">WHERE</span> employee_id <span class="keyword">IN</span>(</span><br><span class="line">    <span class="keyword">SELECT</span>  manager_id</span><br><span class="line">    <span class="keyword">FROM</span> employees</span><br><span class="line">    <span class="keyword">WHERE</span> manager_id <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="literal">NULL</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20200505112845815.png" alt="img"></p>
+<p>更新，不可以的</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> myv6;</span><br><span class="line"><span class="keyword">UPDATE</span> myv6 <span class="keyword">SET</span> salary=<span class="number">10000</span> <span class="keyword">WHERE</span> last_name = <span class="string">'k_ing'</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>测试题</strong></p>
+<p>创建book表，字段如下：</p>
+<p>bid整型，要求主键</p>
+<p>bname字符型，要求设置唯一键，并非空</p>
+<p>price浮点型，要求有默认值10</p>
+<p>bttyped 类型编号，要求引用booktype表的id字段</p>
+<p>已知booktype表（不用创建），字段如下：</p>
+<p>id,name</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> book(</span><br><span class="line">	bid <span class="built_in">INT</span> PRIMARY <span class="keyword">KEY</span>,</span><br><span class="line">	bname <span class="built_in">VARCHAR</span>(<span class="number">20</span>)<span class="keyword">UNIQUE</span> <span class="keyword">NOT</span> <span class="literal">NULL</span></span><br><span class="line">	price <span class="built_in">FLOAT</span> <span class="keyword">DEFAULT</span> <span class="number">10</span>,</span><br><span class="line">	btypedId <span class="built_in">INT</span>,</span><br><span class="line">	<span class="keyword">FOREIGN</span> <span class="keyword">KEY</span>(btypeid) <span class="keyword">REFERENCES</span> bookType(<span class="keyword">id</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>2.开启事物<br>向表中插入1行数据，并结束</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> autocommit=<span class="number">0</span>；</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> book(bid,bname,price,btypeId)</span><br><span class="line"><span class="keyword">values</span>(<span class="number">1</span>,<span class="string">'小李飞刀'</span>，<span class="number">100</span>,<span class="number">1</span>);</span><br><span class="line"><span class="keyword">rollback</span>;</span><br></pre></td></tr></table></figure>
+<p>3.创建视图，实现查询价格在90-120之间的书名和价格</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">view</span> myv1</span><br><span class="line"><span class="keyword">as</span> </span><br><span class="line"><span class="keyword">select</span> bname,<span class="keyword">name</span></span><br><span class="line"><span class="keyword">from</span> book b</span><br><span class="line"><span class="keyword">join</span> bookType t <span class="keyword">on</span> b.typeid=t.id</span><br><span class="line"><span class="keyword">where</span> price&gt;<span class="number">100</span>;</span><br></pre></td></tr></table></figure>
+<p>4.修改视图，实现查询价格在90-120之间的书名和价格</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> <span class="keyword">replace</span> <span class="keyword">view</span> myv1</span><br><span class="line"><span class="keyword">as</span></span><br><span class="line"><span class="keyword">select</span> bname,price</span><br><span class="line"><span class="keyword">from</span> book</span><br><span class="line"><span class="keyword">where</span> price <span class="keyword">between</span> <span class="number">90</span> <span class="keyword">and</span> <span class="number">120</span>;</span><br></pre></td></tr></table></figure>
+<p>5.删除刚才建的视图</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">view</span> myv1；</span><br></pre></td></tr></table></figure>
+<p>$$ —- \mathcal{End} —- $$</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/MySQL/">MySQL</a>, <a class="has-link-grey -link" href="/tags/数据库/">数据库</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/公众号.bmp" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/wechat.jpg" alt="微信"></div>
+</a>
+
+                
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<a class="button is-warning donate" onclick="document.getElementById(&#39;paypal-donate-form&#39;).submit()">
+    <span class="icon is-small">
+        <i class="fab fa-paypal"></i>
+    </span>
+    <span>Paypal</span>
+</a>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" rel="noopener" id="paypal-donate-form">
+    <input type="hidden" name="cmd" value="_donations" />
+    <input type="hidden" name="business" value="1844988765@qq.com" />
+    <input type="hidden" name="currency_code" value="USD" />
+</form>
+
+                
+                
+<a class="button is-danger donate" href="https://github.com/charleschaoyangHan" target="_blank" rel="noopener">
+    <span class="icon is-small">
+        <i class="fab fa-patreon"></i>
+    </span>
+    <span>Patreon</span>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/06/06/数据库/1.数据库基础-DQL/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">1.数据库基础—DQL</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/05/06/java/equals和==（基本数据类型、引用、String）/">
+                <span class="level-item">equals和&#34;==&#34;</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-4-widescreen  has-order-3 column-right ">
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            阅读推荐
+        </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-12T01:59:21.000Z">2019-07-12</time></div>
+                    <a href="/2019/07/12/leetcode1-50/" class="title has-link-black-ter is-size-6 has-text-weight-normal">leetcode 1-50</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/leetcode/">leetcode</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-05T16:00:00.000Z">2020-06-06</time></div>
+                    <a href="/2020/06/06/数据库/1.数据库基础-DQL/" class="title has-link-black-ter is-size-6 has-text-weight-normal">1.数据库基础—DQL</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/数据库/">数据库</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-08T16:00:00.000Z">2020-06-09</time></div>
+                    <a href="/2020/06/09/数据库/3.数据库的设计/" class="title has-link-black-ter is-size-6 has-text-weight-normal">3.数据库的设计</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/数据库/">数据库</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-07T16:00:00.000Z">2020-06-08</time></div>
+                    <a href="/2020/06/08/数据库/2.数据库基础-DML&DDL /" class="title has-link-black-ter is-size-6 has-text-weight-normal">2.数据库基础-DML&amp;DDL</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/数据库/">数据库</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-05T16:00:00.000Z">2020-06-06</time></div>
+                    <a href="/2020/06/06/数据库/5.常见约束&TCL事务控制语言/" class="title has-link-black-ter is-size-6 has-text-weight-normal">5.常见约束&amp;TCL事务控制语言</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/数据库/">数据库</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+        
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#常见约束">
+        <!-- <span class="has-mr-6">1</span> -->
+        <span>常见约束</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#一、创建表时添加约束">
+        <!-- <span class="has-mr-6">1.1</span> -->
+        <span>一、创建表时添加约束</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#1-添加列级约束">
+        <!-- <span class="has-mr-6">1.1.1</span> -->
+        <span>1.添加列级约束</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#">
+        <!-- <span class="has-mr-6">1.2</span> -->
+        <span></span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#2-添加表级约束">
+        <!-- <span class="has-mr-6">1.2.1</span> -->
+        <span>2.添加表级约束</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#二、修改表时添加约束">
+        <!-- <span class="has-mr-6">1.3</span> -->
+        <span>二、修改表时添加约束</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#1-添加非空约束">
+        <!-- <span class="has-mr-6">1.3.1</span> -->
+        <span>1.添加非空约束</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-添加默认约束">
+        <!-- <span class="has-mr-6">1.3.2</span> -->
+        <span>2.添加默认约束</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-添加主键">
+        <!-- <span class="has-mr-6">1.3.3</span> -->
+        <span>3.添加主键</span>
+        </a></li><li>
+        <a class="is-flex" href="#4-添加唯一">
+        <!-- <span class="has-mr-6">1.3.4</span> -->
+        <span>4.添加唯一</span>
+        </a></li><li>
+        <a class="is-flex" href="#5-添加外键">
+        <!-- <span class="has-mr-6">1.3.5</span> -->
+        <span>5.添加外键</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#三、修改表时删除约束">
+        <!-- <span class="has-mr-6">1.4</span> -->
+        <span>三、修改表时删除约束</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#1-删除非空约束">
+        <!-- <span class="has-mr-6">1.4.1</span> -->
+        <span>1.删除非空约束</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-删除默认约束，相当于又加了一遍的感觉">
+        <!-- <span class="has-mr-6">1.4.2</span> -->
+        <span>2.删除默认约束，相当于又加了一遍的感觉</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-删除主键">
+        <!-- <span class="has-mr-6">1.4.3</span> -->
+        <span>3.删除主键</span>
+        </a></li><li>
+        <a class="is-flex" href="#4-删除唯一">
+        <!-- <span class="has-mr-6">1.4.4</span> -->
+        <span>4.删除唯一</span>
+        </a></li><li>
+        <a class="is-flex" href="#5-删除外键">
+        <!-- <span class="has-mr-6">1.4.5</span> -->
+        <span>5.删除外键</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#标识列">
+        <!-- <span class="has-mr-6">1.5</span> -->
+        <span>标识列</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#TCL-Transaction-Control-Language-事务控制语言">
+        <!-- <span class="has-mr-6">2</span> -->
+        <span>TCL-Transaction Control Language 事务控制语言</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#1-事务的隔离级别">
+        <!-- <span class="has-mr-6">2.1</span> -->
+        <span>1. 事务的隔离级别</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#1-脏读演示">
+        <!-- <span class="has-mr-6">2.1.1</span> -->
+        <span>1. 脏读演示:</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-切换隔离级别为read-committed">
+        <!-- <span class="has-mr-6">2.1.2</span> -->
+        <span>2. 切换隔离级别为read committed;</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-切换隔离级别为repeatable-read">
+        <!-- <span class="has-mr-6">2.1.3</span> -->
+        <span>3. 切换隔离级别为repeatable read</span>
+        </a></li><li>
+        <a class="is-flex" href="#4-事物隔离级别为serializable">
+        <!-- <span class="has-mr-6">2.1.4</span> -->
+        <span>4. 事物隔离级别为serializable;</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#2-演示事务对于delete和truncate的处理的区别">
+        <!-- <span class="has-mr-6">2.2</span> -->
+        <span>2. 演示事务对于delete和truncate的处理的区别</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-演示savepoint-的使用（有些像编程中的断点）">
+        <!-- <span class="has-mr-6">2.3</span> -->
+        <span>3. 演示savepoint 的使用（有些像编程中的断点）</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#视图">
+        <!-- <span class="has-mr-6">3</span> -->
+        <span>视图</span>
+        </a><ul class="menu-list"><ul class="menu-list"><li>
+        <a class="is-flex" href="#一、创建视图">
+        <!-- <span class="has-mr-6">3.1.1</span> -->
+        <span>一、创建视图</span>
+        </a></li><li>
+        <a class="is-flex" href="#二、视图的修改">
+        <!-- <span class="has-mr-6">3.1.2</span> -->
+        <span>二、视图的修改</span>
+        </a></li><li>
+        <a class="is-flex" href="#三、删除视图">
+        <!-- <span class="has-mr-6">3.1.3</span> -->
+        <span>三、删除视图</span>
+        </a></li><li>
+        <a class="is-flex" href="#四、查看视图">
+        <!-- <span class="has-mr-6">3.1.4</span> -->
+        <span>四、查看视图</span>
+        </a></li><li>
+        <a class="is-flex" href="#案例讲解">
+        <!-- <span class="has-mr-6">3.1.5</span> -->
+        <span>案例讲解</span>
+        </a></li><li>
+        <a class="is-flex" href="#五、视图的更新">
+        <!-- <span class="has-mr-6">3.1.6</span> -->
+        <span>五、视图的更新</span>
+        </a></li></ul></ul></li></ul>
+            </div>
+        </div>
+    </div>
+
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="5.常见约束&amp;TCL事务控制语言" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2021 charles&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'https://github.com/charleschaoyangHan',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

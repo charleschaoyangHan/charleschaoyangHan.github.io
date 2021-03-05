@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 3.9.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>Numpy语法总结 - charles&#39;s blog</title>
+
+
+    <meta name="description" content="最近更新： 2020-9-10 第一章.数据IONumPy提供了多种存取数组内容的文件操作函数。保存数组数据的文件可以是二进制格式或者文本格式。二进制格式的文件又分为NumPy专用的格式化二进制类型和无格式类型 一，tofile()和fromfile()">
+<meta name="keywords" content="Python库,numpy">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Numpy语法总结">
+<meta property="og:url" content="https://github.com/charleschaoyangHan/2020/08/12/python/Numpy语法总结/index.html">
+<meta property="og:site_name" content="charles&#39;s blog">
+<meta property="og:description" content="最近更新： 2020-9-10 第一章.数据IONumPy提供了多种存取数组内容的文件操作函数。保存数组数据的文件可以是二进制格式或者文本格式。二进制格式的文件又分为NumPy专用的格式化二进制类型和无格式类型 一，tofile()和fromfile()">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/images/og_image.png">
+<meta property="og:updated_time" content="2020-12-16T12:06:55.432Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Numpy语法总结">
+<meta name="twitter:description" content="最近更新： 2020-9-10 第一章.数据IONumPy提供了多种存取数组内容的文件操作函数。保存数组数据的文件可以是二进制格式或者文本格式。二进制格式的文件又分为NumPy专用的格式化二进制类型和无格式类型 一，tofile()和fromfile()">
+<meta name="twitter:image" content="https://github.com/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-2-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="Numpy语法总结" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/categories">Categories</a>
+                
+                <a class="navbar-item"
+                href="/tags">Tags</a>
+                
+                <a class="navbar-item"
+                href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-8-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <!-- <time class="level-item has-text-grey" datetime="2020-08-11T16:00:00.000Z">2020-08-12</time> -->
+                <time class="level-item has-text-grey">写于2020-08-12</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Python/">Python</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    7 分钟 读完 (大约 1000 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Numpy语法总结
+            
+        </h1>
+        <div class="content">
+            <p><code>最近更新： 2020-9-10</code></p>
+<h2 id="第一章-数据IO"><a href="#第一章-数据IO" class="headerlink" title="第一章.数据IO"></a>第一章.数据IO</h2><p>NumPy提供了多种存取数组内容的文件操作函数。保存数组数据的文件可以是二进制格式或者文本格式。二进制格式的文件又分为NumPy专用的格式化二进制类型和无格式类型</p>
+<h3 id="一，tofile-和fromfile"><a href="#一，tofile-和fromfile" class="headerlink" title="一，tofile()和fromfile()"></a>一，tofile()和fromfile()</h3><a id="more"></a>
+<ul>
+<li><ul>
+<li>tofile()将数组中的数据以二进制格式写进文件</li>
+<li>tofile()输出的数据不保存数组形状和元素类型等信息</li>
+<li>fromfile()函数读回数据时需要用户指定元素类型，并对数组的形状进行适当的修改</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://images2015.cnblogs.com/blog/713263/201512/713263-20151201085914812-261106528.png" alt="image"></p>
+<p>从上面的例子可以看出，在读入数据时:需要正确设置dtype参数，并修改数组的shape属性才能得到和原始数据一致的结果。无论数据的排列顺序是C语言格式还是Fortran语言格式，tofile()都统一使用C语言格式输出。此外如果指定了sep参数，则fromfile()和tofile()将以文本格式对数组进行输入输出。sep参数指定的是文本数据中数值的分隔符。</p>
+<h3 id="二-save-和load"><a href="#二-save-和load" class="headerlink" title="二.save()和load()"></a>二.save()和load()</h3><h4 id="save（）"><a href="#save（）" class="headerlink" title="save（）"></a>save（）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">from tempfile import TemporaryFile</span><br><span class="line">outfile = TemporaryFile()</span><br><span class="line"></span><br><span class="line">x = np.arange(10)</span><br><span class="line">np.save(outfile, x)</span><br><span class="line"></span><br><span class="line">_ = outfile.seek(0) # Only needed here to simulate closing &amp; reopening file</span><br><span class="line">np.load(outfile)</span><br><span class="line">#结果：array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])</span><br><span class="line">with open(&apos;test.npy&apos;, &apos;wb&apos;) as f:</span><br><span class="line">    np.save(f, np.array([1, 2]))</span><br><span class="line">    np.save(f, np.array([1, 3]))</span><br><span class="line">with open(&apos;test.npy&apos;, &apos;rb&apos;) as f:</span><br><span class="line">    a = np.load(f)</span><br><span class="line">    b = np.load(f)</span><br><span class="line">print(a, b)</span><br><span class="line"># [1 2] [1 3]</span><br></pre></td></tr></table></figure>
+<ol>
+<li>如果想将多个数组保存到一个文件中，可以使用savez()</li>
+<li>savez()的第一个参数是文件名，其后的参数都是需要保存的数组，也可以使用关键字参数为数组起名</li>
+<li>非关键字参数传递的数组会自动起名为arr_0、arr_1、…。</li>
+<li>savez()输出的是一个扩展名为npz的压缩文件，其中每个文件都是一个save()保存的npy文件，文件名和数组名相同</li>
+<li>load()自动识别npz文件，并且返回一个类似于字典的对象，可以通过数组名作为键获取数组的内容</li>
+</ol>
+<p><a href="http://images2015.cnblogs.com/blog/713263/201512/713263-20151201085920530-2035402235.png"><img src="http://images2015.cnblogs.com/blog/713263/201512/713263-20151201085921046-705156815.png" alt="image"></a></p>
+<p><a href="http://images2015.cnblogs.com/blog/713263/201512/713263-20151201085921358-1416278519.png"><img src="http://images2015.cnblogs.com/blog/713263/201512/713263-20151201085921671-1618280714.png" alt="image"></a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="第二章数据类型"><a href="#第二章数据类型" class="headerlink" title="第二章数据类型"></a>第二章数据类型</h2><p>固定长度的整型，包括有符号整型或无符号整型。</p>
+<h3 id="1-整型"><a href="#1-整型" class="headerlink" title="1.整型"></a>1.整型</h3><h4 id="整型范围"><a href="#整型范围" class="headerlink" title="整型范围"></a>整型范围</h4><ul>
+<li>Int8 - [-128 : 127]</li>
+<li>Int16 - [-32768 : 32767]</li>
+<li>Int32 - [-2147483648 : 2147483647]</li>
+<li>Int64 - [-9223372036854775808 : 9223372036854775807]</li>
+</ul>
+<h4 id="无符号整型范围"><a href="#无符号整型范围" class="headerlink" title="无符号整型范围"></a>无符号整型范围</h4><ul>
+<li>UInt8 - [0 : 255]</li>
+<li>UInt16 - [0 : 65535]</li>
+<li>UInt32 - [0 : 4294967295]</li>
+<li>UInt64 - [0 : 18446744073709551615]</li>
+</ul>
+<h3 id="2-浮点数据类型"><a href="#2-浮点数据类型" class="headerlink" title="2.浮点数据类型"></a>2.浮点数据类型</h3><h4 id="single数据类型"><a href="#single数据类型" class="headerlink" title="single数据类型"></a>single数据类型</h4><p>存储有符号的 IEEE 格式 32 位（4 个字节）单精度浮点数，负数取值范围为 －3.4028235E+38～－1.401298E－45，正数取值范围为 1.401298E－45 到 3.4028235E+38。单精度数值存储实数数值的近似值。</p>
+<h3 id="3-nan值数据类型"><a href="#3-nan值数据类型" class="headerlink" title="3.nan值数据类型"></a>3.nan值数据类型</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>l=np.array([[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">2</span>,<span class="number">3</span>],[np.nan,<span class="number">3</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>l</span><br><span class="line">array([[ <span class="number">1.</span>,  <span class="number">2.</span>],</span><br><span class="line">       [ <span class="number">2.</span>,  <span class="number">3.</span>],</span><br><span class="line">       [nan,  <span class="number">3.</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>l.mean()</span><br><span class="line">nan</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>l[np.isnan(l)]=<span class="number">0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>l</span><br><span class="line">array([[<span class="number">1.</span>, <span class="number">2.</span>],</span><br><span class="line">       [<span class="number">2.</span>, <span class="number">3.</span>],</span><br><span class="line">       [<span class="number">0.</span>, <span class="number">3.</span>]])</span><br></pre></td></tr></table></figure>
+<h2 id="第三章数组形状"><a href="#第三章数组形状" class="headerlink" title="第三章数组形状"></a>第三章数组形状</h2><h3 id="1改变数组形状"><a href="#1改变数组形状" class="headerlink" title="1改变数组形状"></a>1改变数组形状</h3><h4 id="1-1将数组变为具体的形状"><a href="#1-1将数组变为具体的形状" class="headerlink" title="1.1将数组变为具体的形状"></a>1.1将数组变为具体的形状</h4><p><strong>reshape(shape)</strong> ： 不改变数组元素，返回一个shape形状的数组，原数组不变。是对每行元素进行处理<br><strong>resize(shape)</strong> ： 与.reshape()功能一致，但修改原数组</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">1</span>]: a = np.arange(<span class="number">20</span>)</span><br><span class="line"><span class="comment">#原数组不变</span></span><br><span class="line">In [<span class="number">2</span>]: a.reshape([<span class="number">4</span>,<span class="number">5</span>])</span><br><span class="line">Out[<span class="number">2</span>]:</span><br><span class="line">array([[ <span class="number">0</span>,  <span class="number">1</span>,  <span class="number">2</span>,  <span class="number">3</span>,  <span class="number">4</span>],</span><br><span class="line">       [ <span class="number">5</span>,  <span class="number">6</span>,  <span class="number">7</span>,  <span class="number">8</span>,  <span class="number">9</span>],</span><br><span class="line">       [<span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>],</span><br><span class="line">       [<span class="number">15</span>, <span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>]])</span><br><span class="line"> </span><br><span class="line">In [<span class="number">3</span>]: a</span><br><span class="line">Out[<span class="number">3</span>]:</span><br><span class="line">array([ <span class="number">0</span>,  <span class="number">1</span>,  <span class="number">2</span>,  <span class="number">3</span>,  <span class="number">4</span>,  <span class="number">5</span>,  <span class="number">6</span>,  <span class="number">7</span>,  <span class="number">8</span>,  <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>, <span class="number">15</span>, <span class="number">16</span>,</span><br><span class="line">       <span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>])</span><br><span class="line"> </span><br><span class="line"><span class="comment">#修改原数组</span></span><br><span class="line">In [<span class="number">4</span>]: a.resize([<span class="number">4</span>,<span class="number">5</span>])</span><br><span class="line"> </span><br><span class="line">In [<span class="number">5</span>]: a</span><br><span class="line">Out[<span class="number">5</span>]:</span><br><span class="line">array([[ <span class="number">0</span>,  <span class="number">1</span>,  <span class="number">2</span>,  <span class="number">3</span>,  <span class="number">4</span>],</span><br><span class="line">       [ <span class="number">5</span>,  <span class="number">6</span>,  <span class="number">7</span>,  <span class="number">8</span>,  <span class="number">9</span>],</span><br><span class="line">       [<span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>],</span><br><span class="line">       [<span class="number">15</span>, <span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>]])</span><br></pre></td></tr></table></figure>
+<p><strong>.swapaxes(ax1,ax2) ：</strong> 将数组n个维度中两个维度进行调换，不改变原数组</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">6</span>]: a.swapaxes(<span class="number">1</span>,<span class="number">0</span>)</span><br><span class="line">Out[<span class="number">6</span>]:</span><br><span class="line">array([[ <span class="number">0</span>,  <span class="number">5</span>, <span class="number">10</span>, <span class="number">15</span>],</span><br><span class="line">       [ <span class="number">1</span>,  <span class="number">6</span>, <span class="number">11</span>, <span class="number">16</span>],</span><br><span class="line">       [ <span class="number">2</span>,  <span class="number">7</span>, <span class="number">12</span>, <span class="number">17</span>],</span><br><span class="line">       [ <span class="number">3</span>,  <span class="number">8</span>, <span class="number">13</span>, <span class="number">18</span>],</span><br><span class="line">       [ <span class="number">4</span>,  <span class="number">9</span>, <span class="number">14</span>, <span class="number">19</span>]])</span><br></pre></td></tr></table></figure>
+<h4 id="1-2将多维数组转为一维数组"><a href="#1-2将多维数组转为一维数组" class="headerlink" title="1.2将多维数组转为一维数组"></a>1.2将多维数组转为一维数组</h4><p><strong>ravel()</strong>：如果没有必要，不会产生源数据的副本<br><strong>flatten()：</strong>返回源数据的副本<br><strong>squeeze()：</strong>只能对维数为1的维度降维</p>
+<p>另外，<strong>reshape(-1)</strong>也可以“拉平”多维数组</p>
+<p><img src="https://img-blog.csdn.net/20180109095535985?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHltYXRsYWI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p><img src="https://img-blog.csdn.net/20180109095535985?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdHltYXRsYWI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="img"></p>
+<p>$$ —- \mathcal{End} —- $$</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Python库/">Python库</a>, <a class="has-link-grey -link" href="/tags/numpy/">numpy</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/公众号.bmp" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/wechat.jpg" alt="微信"></div>
+</a>
+
+                
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<a class="button is-warning donate" onclick="document.getElementById(&#39;paypal-donate-form&#39;).submit()">
+    <span class="icon is-small">
+        <i class="fab fa-paypal"></i>
+    </span>
+    <span>Paypal</span>
+</a>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" rel="noopener" id="paypal-donate-form">
+    <input type="hidden" name="cmd" value="_donations" />
+    <input type="hidden" name="business" value="1844988765@qq.com" />
+    <input type="hidden" name="currency_code" value="USD" />
+</form>
+
+                
+                
+<a class="button is-danger donate" href="https://github.com/charleschaoyangHan" target="_blank" rel="noopener">
+    <span class="icon is-small">
+        <i class="fab fa-patreon"></i>
+    </span>
+    <span>Patreon</span>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2021/01/12/深度学习/从CNN到UNet/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">从CNN到UNet</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/07/20/命令行与配置/icarus主题配置/">
+                <span class="level-item">icarus主题配置</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-4-widescreen  has-order-3 column-right ">
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            阅读推荐
+        </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-12T01:59:21.000Z">2019-07-12</time></div>
+                    <a href="/2019/07/12/leetcode1-50/" class="title has-link-black-ter is-size-6 has-text-weight-normal">leetcode 1-50</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/leetcode/">leetcode</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-05T16:00:00.000Z">2020-06-06</time></div>
+                    <a href="/2020/06/06/数据库/1.数据库基础-DQL/" class="title has-link-black-ter is-size-6 has-text-weight-normal">1.数据库基础—DQL</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/数据库/">数据库</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-08T16:00:00.000Z">2020-06-09</time></div>
+                    <a href="/2020/06/09/数据库/3.数据库的设计/" class="title has-link-black-ter is-size-6 has-text-weight-normal">3.数据库的设计</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/数据库/">数据库</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-07T16:00:00.000Z">2020-06-08</time></div>
+                    <a href="/2020/06/08/数据库/2.数据库基础-DML&DDL /" class="title has-link-black-ter is-size-6 has-text-weight-normal">2.数据库基础-DML&amp;DDL</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/数据库/">数据库</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-05T16:00:00.000Z">2020-06-06</time></div>
+                    <a href="/2020/06/06/数据库/5.常见约束&TCL事务控制语言/" class="title has-link-black-ter is-size-6 has-text-weight-normal">5.常见约束&amp;TCL事务控制语言</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/数据库/">数据库</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+        
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#第一章-数据IO">
+        <!-- <span class="has-mr-6">1</span> -->
+        <span>第一章.数据IO</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#一，tofile-和fromfile">
+        <!-- <span class="has-mr-6">1.1</span> -->
+        <span>一，tofile()和fromfile()</span>
+        </a></li><li>
+        <a class="is-flex" href="#二-save-和load">
+        <!-- <span class="has-mr-6">1.2</span> -->
+        <span>二.save()和load()</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#save（）">
+        <!-- <span class="has-mr-6">1.2.1</span> -->
+        <span>save（）</span>
+        </a></li></ul></li></ul></li><li>
+        <a class="is-flex" href="#第二章数据类型">
+        <!-- <span class="has-mr-6">2</span> -->
+        <span>第二章数据类型</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#1-整型">
+        <!-- <span class="has-mr-6">2.1</span> -->
+        <span>1.整型</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#整型范围">
+        <!-- <span class="has-mr-6">2.1.1</span> -->
+        <span>整型范围</span>
+        </a></li><li>
+        <a class="is-flex" href="#无符号整型范围">
+        <!-- <span class="has-mr-6">2.1.2</span> -->
+        <span>无符号整型范围</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#2-浮点数据类型">
+        <!-- <span class="has-mr-6">2.2</span> -->
+        <span>2.浮点数据类型</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#single数据类型">
+        <!-- <span class="has-mr-6">2.2.1</span> -->
+        <span>single数据类型</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#3-nan值数据类型">
+        <!-- <span class="has-mr-6">2.3</span> -->
+        <span>3.nan值数据类型</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#第三章数组形状">
+        <!-- <span class="has-mr-6">3</span> -->
+        <span>第三章数组形状</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#1改变数组形状">
+        <!-- <span class="has-mr-6">3.1</span> -->
+        <span>1改变数组形状</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#1-1将数组变为具体的形状">
+        <!-- <span class="has-mr-6">3.1.1</span> -->
+        <span>1.1将数组变为具体的形状</span>
+        </a></li><li>
+        <a class="is-flex" href="#1-2将多维数组转为一维数组">
+        <!-- <span class="has-mr-6">3.1.2</span> -->
+        <span>1.2将多维数组转为一维数组</span>
+        </a></li></ul></li></ul></li></ul>
+            </div>
+        </div>
+    </div>
+
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="Numpy语法总结" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2021 charles&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'https://github.com/charleschaoyangHan',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
